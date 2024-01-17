@@ -4,20 +4,60 @@ using UnityEngine;
 
 public class BulletTestScript : MonoBehaviour
 {
-    BulletManager bm;
-    public int bulletCount;
-    // Start is called before the first frame update
-    void Start()
+    public BulletManager bulletManager;
+    public float testInterval = 2f; // Time in seconds between test bullet spawns
+    public float bulletSpeed = 10f;
+    public int bulletDamage = 1;
+    public string ownerTag = "Player";
+
+    private float testTimer;
+    private int testPhase = 0;
+
+    private void Start()
     {
-        bm = GetComponent<BulletManager>();
-        bulletCount = 10;
+        if (bulletManager == null)
+        {
+            Debug.LogError("BulletManager reference not set in BulletTest.");
+            return;
+        }
+
+        testTimer = 0f;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (bulletCount > 0)
-            bm.SpawnBullet(new Vector3(1, 0, 1), 5, 5, "Enemy");
-        bulletCount--;
+        testTimer += Time.deltaTime;
+
+        if (testTimer >= testInterval)
+        {
+            testTimer = 0f;
+            FireTestBullet();
+        }
     }
+
+    private void FireTestBullet()
+    {
+        Vector3 direction = Vector3.zero;
+
+        switch (testPhase)
+        {
+            case 0:
+                direction = Vector3.right;
+                break;
+            case 1:
+                direction = Vector3.left;
+                break;
+            case 2:
+                direction = Vector3.forward;
+                break;
+            case 3:
+                direction = Vector3.back;
+                break;
+        }
+
+        bulletManager.SpawnBullet(direction, bulletSpeed, bulletDamage, ownerTag);
+
+        testPhase = (testPhase + 1) % 4; // Cycle through test phases
+    }
+
 }

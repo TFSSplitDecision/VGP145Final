@@ -69,22 +69,21 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        
         if (collision.gameObject.CompareTag("Player") && (owner == "Enemy"))
         {
             // This is where player damage will be tracked, for now, just a console log will be outputed.
             Debug.Log("Bullet hit player for " + damage + " damage");
-            Destroy(gameObject);
         }
         if (collision.gameObject.CompareTag("Enemy") && (owner == "Player"))
         {
             // This is where enemy damage will be tracked, for now, just a console log will be outputed.
             Debug.Log("Bullet hit enemy for " + damage + " damage");
-            Destroy(gameObject);
         }
         if (collision.gameObject.CompareTag("Wall"))
         {
             Debug.Log("Bullet hit a wall");
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }

@@ -1,0 +1,1 @@
+Textures that are sprites (used for UI and in-game sprites).

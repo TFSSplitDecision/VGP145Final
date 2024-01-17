@@ -5,8 +5,8 @@ using UnityEngine.Events;
 public abstract class Equipment : ScriptableObject
 {
     public GameObject player;
-    protected Shooting shooting;
-    protected MeleeHit
+    //protected Shooting shooting;
+    //protected MeleeHit
 
     public Sprite icon;
 
@@ -15,8 +15,9 @@ public abstract class Equipment : ScriptableObject
 
     public void Pickup( GameObject player )
     {
+        Debug.Log("Equipment " + name + " was picked up by " + player);
         this.player = player;
-        shooting = player.GetComponent<Shooting>();
+        //shooting = player.GetComponent<Shooting>();
     }
 
     //protected abstract void secondaryFire();
@@ -38,14 +39,7 @@ public class MeleeSword : Arm1 {
 
     public override void primaryFire()
     {
-        Debug.Log("Pew!");
-
-        // figure start
-        // figure end
-        // 
-
-        MeleeSword.Slash()
-        // Logic 
+        Debug.Log("Slash!");
     }
 }
 
@@ -58,9 +52,7 @@ public class Gun : Arm1
 
     public override void primaryFire()
     {
-        
-        shooting.shoot1();
-        // Logic 
+        Debug.Log("Pew Pew!");
     }
 }
 public class ReversePistol : Gun
@@ -73,36 +65,5 @@ public class ReversePistol : Gun
     public override void primaryFire()
     {
 
-        shooting.shoot2();
-        // Logic 
     }
-}
-
-// On the player
-public class Shooting : MonoBehaviour
-{
-
-    public void ShootMulti()
-    {
-        // Spawns 3 bullets
-    }
-
-    public void Shoot1()
-    {
-        // Spawn 1 bullet that use
-        // Spawns effect
-        // Plays sound seffecf
-    }
-
-    public void Update()
-    {
-        // Check the input
-        // direction = transform.forward
-    }
-
-}
-
-public class Looking : MonoBehaviour
-{
-
 }

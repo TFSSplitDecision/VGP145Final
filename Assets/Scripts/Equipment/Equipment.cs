@@ -10,21 +10,21 @@ public abstract class Equipment : ScriptableObject {
 
     [Header("Health Modifiers")]
     [SerializeField]
-    protected float healthMultiply = 1;
+    private float healthMultiply = 1;
     [SerializeField]
-    protected int healthAdd = 0;
+    private int healthAdd = 0;
 
-    [Header("Attack Speed Modifiers")]
+    [Header("Attack Speed (Attack Per Second) Modifiers")]
     [SerializeField]
-    protected float attackSpeedMultiply = 1;
+    private float attackSpeedMultiply = 1;
     [SerializeField]
-    protected int attackSpeedAdd = 0;
+    private int attackSpeedAdd = 0;
 
     [Header("Attack Damage Modifiers")]
     [SerializeField]
-    protected float attackDamageMultiply = 1;
+    private float attackDamageMultiply = 1;
     [SerializeField]
-    protected int attackDamageAdd = 0;
+    private int attackDamageAdd = 0;
 
     [Header("Move Speed Modifiers")]
     [SerializeField]
@@ -51,8 +51,12 @@ public abstract class Helmet : Equipment {
 
 public abstract class Arm1 : Equipment {
     [Header("Arm 1 Values")]
+
     [SerializeField]
     private float attacksPerSecond;
+
+    [SerializeField]
+    protected float flatDamage;
     private bool readyToFire => true; // TODO: True represented by cooldown not impeeding
     public void primaryFire() {
         if (!readyToFire) return;
@@ -62,11 +66,16 @@ public abstract class Arm1 : Equipment {
 }
 public abstract class Arm2 : Equipment {
     [Header("Arm 2 Values")]
+
     [SerializeField]
     private float attacksPerSecond;
+
     [SerializeField]
     private int maxAmmo;
     private int ammo;
+
+    [SerializeField]
+    protected float flatDamage;
     private bool readyToFire => ammo > 0 && true; // TODO: True represented by cooldown not impeeding
     public void secondaryFire() {
         if (!readyToFire) return;

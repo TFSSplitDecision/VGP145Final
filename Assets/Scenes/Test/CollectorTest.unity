@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: 1886641484}
   - component: {fileID: 1886641483}
   - component: {fileID: 1886641487}
+  - component: {fileID: 1886641488}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -430,6 +431,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doCollect: 0
+--- !u!114 &1886641488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886641482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b361352e858d8941b0857155a9fd382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helmetSlot: {fileID: 0}
+  arm1Slot: {fileID: 0}
+  arm2Slot: {fileID: 0}
+  chestSlot: {fileID: 0}
+  legsSlot: {fileID: 0}
 --- !u!1 &2070418905
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8095f285c7156164192dc69faa314a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipment: {fileID: 11400000, guid: a1bade9a38ca35d4fbc267939ec2d59a, type: 2}
+  equipment: {fileID: 11400000, guid: d10f5f62fef12b24ebe812ecc55067b7, type: 2}
   targetTag: Player
 --- !u!135 &2070418907
 SphereCollider:

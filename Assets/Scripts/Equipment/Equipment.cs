@@ -1,48 +1,93 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
+using System.Collections;
 
-public abstract class Equipment : ScriptableObject
-{
+public abstract class Equipment : ScriptableObject {
     public GameObject player;
     //protected Shooting shooting;
     //protected MeleeHit
 
     public Sprite icon;
 
+    [Header("Health Modifiers")]
     [SerializeField]
-    private float healthMod;
+    protected float healthMultiply = 1;
+    [SerializeField]
+    protected int healthAdd = 0;
 
-    public void Pickup( GameObject player )
-    {
+    [Header("Attack Speed Modifiers")]
+    [SerializeField]
+    protected float attackSpeedMultiply = 1;
+    [SerializeField]
+    protected int attackSpeedAdd = 0;
+
+    [Header("Attack Damage Modifiers")]
+    [SerializeField]
+    protected float attackDamageMultiply = 1;
+    [SerializeField]
+    protected int attackDamageAdd = 0;
+
+    [Header("Move Speed Modifiers")]
+    [SerializeField]
+    protected float moveSpeedMultiply = 1;
+    [SerializeField]
+    protected int moveSpeedAdd = 0;
+
+    [Header("Damage Reduction")]
+    [SerializeField]
+    protected float damageReductionMultiply = 1;
+    [SerializeField]
+    protected int damageReductionAdd = 0;
+
+    private void Awake() {
+
+    }
+    public void Pickup( GameObject player ) {
         Debug.Log("Equipment " + name + " was picked up by " + player);
         this.player = player;
-        //shooting = player.GetComponent<Shooting>();
-    }
-
-    //protected abstract void secondaryFire();
-
-}
-
-public abstract class Arm1 : Equipment
-{
-
-    public abstract void primaryFire();
-}
-
-[CreateAssetMenu(fileName = "Data", menuName = "Data/MeleeSword", order = 1)]
-public class MeleeSword : Arm1 {
-    
-    [Header("Variables")]
-    public float lastshot;
-    public UnityEvent test;
-
-    public override void primaryFire()
-    {
-        Debug.Log("Slash!");
     }
 }
+public abstract class Helmet : Equipment {
+}
 
+public abstract class Arm1 : Equipment {
+    [Header("Arm 1 Values")]
+    [SerializeField]
+    private float attacksPerSecond;
+    private bool readyToFire => true; // TODO: True represented by cooldown not impeeding
+    public void primaryFire() {
+        if (!readyToFire) return;
+        primaryFireScript();
+    }
+    protected abstract void primaryFireScript();
+}
+public abstract class Arm2 : Equipment {
+    [Header("Arm 2 Values")]
+    [SerializeField]
+    private float attacksPerSecond;
+    [SerializeField]
+    private int maxAmmo;
+    private int ammo;
+    private bool readyToFire => ammo > 0 && true; // TODO: True represented by cooldown not impeeding
+    public void secondaryFire() {
+        if (!readyToFire) return;
+        secondaryFireScript();
+        ammo--;
+    }
+    public void gainAmmo(int extraAmmo) {
+        ammo += extraAmmo;
+        if (ammo > maxAmmo)
+            ammo = maxAmmo;
+    }
+    protected abstract void secondaryFireScript();
+}
+public abstract class Chest : Equipment {
+
+}
+public abstract class Legs : Equipment {
+
+}
+
+/*
 public class Gun : Arm1
 {
 
@@ -67,3 +112,4 @@ public class ReversePistol : Gun
 
     }
 }
+*/

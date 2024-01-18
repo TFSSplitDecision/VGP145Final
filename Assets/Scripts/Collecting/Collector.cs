@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
@@ -8,14 +6,18 @@ using UnityEngine;
 /// <summary>
 /// Attach this script on characters that should be able to collect objects (collectibles)
 /// </summary>
+[RequireComponent(typeof(InventoryManager))]
 public class Collector : MonoBehaviour
 {
     protected HashSet<Collectible> collectibles;
 
     [Header("Variables")]
-    [SerializeField, ReadOnly(true)]
+    [SerializeField, ReadOnly]
     protected bool doCollect;
-
+    private InventoryManager im;
+    private void Start() {
+        im = GetComponent<InventoryManager>();
+    }
 
     /// <summary>
     /// Let's the collector know that there's an item in grab range.
@@ -58,6 +60,7 @@ public class Collector : MonoBehaviour
             var collectible = collectibles.FirstOrDefault<Collectible>();
             if (collectible != null)
             {
+                im.pickup(collectible.equipment);
                 bool success = collectible.Collect(gameObject); 
                 if( success )
                 {

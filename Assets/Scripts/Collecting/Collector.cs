@@ -60,11 +60,12 @@ public class Collector : MonoBehaviour
             var collectible = collectibles.FirstOrDefault<Collectible>();
             if (collectible != null)
             {
-                im.pickup(collectible.equipment);
-                bool success = collectible.Collect(gameObject); 
-                if( success )
+                bool canCollect = collectible.CanCollect(); 
+                if(canCollect)
                 {
+                    im.Pickup(collectible.equipment);
                     collectibles.Remove(collectible);
+                    Destroy(collectible.gameObject);
                 }
             }
         }

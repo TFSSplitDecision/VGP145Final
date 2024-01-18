@@ -1,12 +1,25 @@
 using UnityEngine;
 using System.Collections;
 
+
+
 public abstract class Equipment : ScriptableObject {
-    public GameObject player;
+
     //protected Shooting shooting;
     //protected MeleeHit
 
+    private GameObject player;
+
+    #region Components
+    // ..
+    #endregion
+
+
     public Sprite icon;
+
+
+    [Tooltip("What object to spawn when the equipment is dropped")]
+    public GameObject dropPrefab;
 
     [Header("Health Modifiers")]
     [SerializeField]
@@ -38,13 +51,19 @@ public abstract class Equipment : ScriptableObject {
     [SerializeField]
     protected int damageReductionAdd = 0;
 
+
+
     private void Awake() {
 
     }
-    public void Pickup( GameObject player ) {
-        Debug.Log("Equipment " + name + " was picked up by " + player);
+
+
+    public void Init( GameObject player )
+    {
         this.player = player;
+        // Grab all components
     }
+
 }
 public abstract class Helmet : Equipment {
 }
@@ -95,30 +114,3 @@ public abstract class Chest : Equipment {
 public abstract class Legs : Equipment {
 
 }
-
-/*
-public class Gun : Arm1
-{
-
-    [Header("Variables")]
-    public float lastshot;
-    public UnityEvent test;
-
-    public override void primaryFire()
-    {
-        Debug.Log("Pew Pew!");
-    }
-}
-public class ReversePistol : Gun
-{
-
-    [Header("Variables")]
-    public float lastshot;
-    public UnityEvent test;
-
-    public override void primaryFire()
-    {
-
-    }
-}
-*/

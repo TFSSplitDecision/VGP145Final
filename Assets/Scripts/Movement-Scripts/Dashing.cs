@@ -6,9 +6,10 @@ public class PlayerDash : MonoBehaviour
     public float dashSpeed = 20f;
     public float dashDistance = 5f;
     public float dashCooldownTime = 2f;
-    public int maxDashCharges = 3;
 
+    public int maxDashCharges = 3;
     private int currentDashCharges;
+
     private bool isDashing;
     private Vector3 dashDirection;
     private Vector3 dashStartPosition;
@@ -25,7 +26,7 @@ public class PlayerDash : MonoBehaviour
         if (isDashing == false)
         {
             dashStartPosition = transform.position;
-            Debug.Log("Dash Position: " + transform.position);
+            // Debug.Log("Dash Position: " + transform.position);
         }
 
         if (Input.GetButtonDown("Fire1") && currentDashCharges > 0 && !isDashing)
@@ -37,35 +38,34 @@ public class PlayerDash : MonoBehaviour
         }
     }
 
-  private IEnumerator Dash()
-{
-    isDashing = true;
-    currentDashCharges--;
-
-    float dashTimer = 0f;
-    float initialDistance = Vector3.Distance(dashStartPosition, transform.position);
-
-    while (dashTimer < dashCooldownTime)
+    private IEnumerator Dash()
     {
-        charController.Move(dashDirection * dashSpeed * Time.deltaTime);
+        isDashing = true;
+        currentDashCharges--;
 
-        // Check if the player has reached or exceeded the dash distance
-        float currentDistance = Vector3.Distance(dashStartPosition, transform.position);
-        if (currentDistance >= initialDistance + dashDistance)
+        float dashTimer = 0f;
+        float initialDistance = Vector3.Distance(dashStartPosition, transform.position);
+
+        while (dashTimer < dashCooldownTime)
         {
-            break; // Exit the loop if the dash distance is reached
+            charController.Move(dashDirection * dashSpeed * Time.deltaTime);
+
+            // Check if the player has reached or exceeded the dash distance
+            float currentDistance = Vector3.Distance(dashStartPosition, transform.position);
+            if (currentDistance >= initialDistance + dashDistance)
+            {
+                break;
+            }
+
+            dashTimer += Time.deltaTime;
+            yield return null;
         }
 
-        dashTimer += Time.deltaTime;
-        yield return null;
+        isDashing = false;
+
+        if (currentDashCharges < maxDashCharges)
+            currentDashCharges++;
     }
-
-    isDashing = false;
-
-    if (currentDashCharges < maxDashCharges)
-        currentDashCharges++;
-}
-
 
     private Vector3 GetMouseWorldPosition()
     {

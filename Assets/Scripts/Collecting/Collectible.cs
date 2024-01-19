@@ -13,7 +13,10 @@ public class Collectible : MonoBehaviour
     protected string targetTag = "Player";
 
 
+    protected float cooldown = 1.0f;
 
+
+    public GameObject prefabTest;
 
     // Start is called before the first frame update
     void Start()
@@ -26,29 +29,17 @@ public class Collectible : MonoBehaviour
     /// Checks if the item can be collected at the moment
     /// </summary>
     /// <returns></returns>
-    protected bool canCollect()
+    public bool CanCollect()
     {
+        if (cooldown > float.Epsilon) return false;
         return true;
     }
 
-    /// <summary>
-    /// Finalizes object collection.
-    /// </summary>
-    /// <param name="owner"></param>
-    /// <returns>Returns true if item is collected succesfully. Returns false otherwise.</returns>
-    public bool Collect( GameObject owner )
+    private void OnDestroy()
     {
-        if (!canCollect()) return false;
-
-        // Success! Collect object
-        equipment.Pickup(owner);
-
         // TODO: Item collection visual effects
         // TODO: Play sound
-
-        Destroy(gameObject);
-
-        return true;
+        Instantiate(prefabTest);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -68,5 +59,6 @@ public class Collectible : MonoBehaviour
     void Update()
     {
         // Item animations go here
+        cooldown -= Time.deltaTime;
     }
 }

@@ -22,6 +22,12 @@ public class PlayerDash : MonoBehaviour
 
     private void Update()
     {
+        if (isDashing == false)
+        {
+            dashStartPosition = transform.position;
+            Debug.Log("Dash Position: " + transform.position);
+        }
+
         if (Input.GetButtonDown("Fire1") && currentDashCharges > 0 && !isDashing)
         {
             var mousePosition = GetMouseWorldPosition();
@@ -31,23 +37,35 @@ public class PlayerDash : MonoBehaviour
         }
     }
 
-    private IEnumerator Dash()
-    {
-        isDashing = true;
-        currentDashCharges--;
-        dashStartPosition = transform.position;
+  private IEnumerator Dash()
+{
+    isDashing = true;
+    currentDashCharges--;
 
-        while (Vector3.Distance(dashStartPosition, transform.position) < dashDistance)
+    float dashTimer = 0f;
+    float initialDistance = Vector3.Distance(dashStartPosition, transform.position);
+
+    while (dashTimer < dashCooldownTime)
+    {
+        charController.Move(dashDirection * dashSpeed * Time.deltaTime);
+
+        // Check if the player has reached or exceeded the dash distance
+        float currentDistance = Vector3.Distance(dashStartPosition, transform.position);
+        if (currentDistance >= initialDistance + dashDistance)
         {
-            charController.Move(dashDirection * dashSpeed * Time.deltaTime);
-            yield return null;
+            break; // Exit the loop if the dash distance is reached
         }
 
-        isDashing = false;
-        yield return new WaitForSeconds(dashCooldownTime);
-
-        if (currentDashCharges < maxDashCharges) currentDashCharges++;
+        dashTimer += Time.deltaTime;
+        yield return null;
     }
+
+    isDashing = false;
+
+    if (currentDashCharges < maxDashCharges)
+        currentDashCharges++;
+}
+
 
     private Vector3 GetMouseWorldPosition()
     {

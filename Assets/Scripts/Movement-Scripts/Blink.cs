@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Blink : MonoBehaviour
+public class PlayerBlink : MonoBehaviour
 {
     public float blinkDistance = 5f;
 

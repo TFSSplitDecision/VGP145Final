@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
 /// <summary>
 /// Attach this script on characters that should be able to collect objects (collectibles)
 /// </summary>
@@ -15,7 +14,9 @@ public class Collector : MonoBehaviour
     [SerializeField, ReadOnly]
     protected bool doCollect;
     private InventoryManager im;
-    private void Start() {
+
+    private void Start()
+    {
         im = GetComponent<InventoryManager>();
     }
 
@@ -23,7 +24,7 @@ public class Collector : MonoBehaviour
     /// Let's the collector know that there's an item in grab range.
     /// </summary>
     /// <param name="collectible"></param>
-    public void Notify( Collectible collectible )
+    public void Notify(Collectible collectible)
     {
         if (collectibles == null) collectibles = new HashSet<Collectible>();
         collectibles.Add(collectible);
@@ -47,13 +48,13 @@ public class Collector : MonoBehaviour
     public bool ShouldCollect()
     {
         // TODO: Use player input to collect?
-        return (collectibles != null) && (collectibles.Count > 0 );
+        return (collectibles != null) && (collectibles.Count > 0) && Input.GetKeyDown(KeyCode.P); //I added an input line here
     }
 
     protected void Update()
     {
         doCollect = ShouldCollect();
-        if( doCollect )
+        if (doCollect)
         {
             doCollect = false;
 
@@ -61,13 +62,12 @@ public class Collector : MonoBehaviour
             if (collectible != null)
             {
                 im.pickup(collectible.equipment);
-                bool success = collectible.Collect(gameObject); 
-                if( success )
+                bool success = collectible.Collect(gameObject);
+                if (success)
                 {
                     collectibles.Remove(collectible);
                 }
             }
         }
     }
-
 }

@@ -24,32 +24,43 @@ public abstract class Equipment : ScriptableObject {
     [Header("Health Modifiers")]
     [SerializeField]
     private float healthMultiply = 1;
+    public float getHealthMultiply() => healthMultiply;
     [SerializeField]
     private int healthAdd = 0;
+    public int getHealthAdd() => healthAdd;
+
 
     [Header("Attack Speed (Attack Per Second) Modifiers")]
     [SerializeField]
     private float attackSpeedMultiply = 1;
+    public float getAttackSpeedMultiply() => attackSpeedMultiply;
     [SerializeField]
     private int attackSpeedAdd = 0;
+    public int getAttackSpeedAdd() => attackSpeedAdd;
 
     [Header("Attack Damage Modifiers")]
     [SerializeField]
     private float attackDamageMultiply = 1;
+    public float getAttackDamageMultiply() => attackDamageMultiply;
     [SerializeField]
     private int attackDamageAdd = 0;
+    public int getAttackDamageAdd() => attackDamageAdd;
 
     [Header("Move Speed Modifiers")]
     [SerializeField]
     protected float moveSpeedMultiply = 1;
+    public float getMoveSpeedMultiply() => moveSpeedMultiply;
     [SerializeField]
     protected int moveSpeedAdd = 0;
+    public int getMoveSpeedAdd() => moveSpeedAdd;
 
     [Header("Damage Reduction")]
     [SerializeField]
     protected float damageReductionMultiply = 1;
+    public float getDamageReductionMultiply() => damageReductionMultiply;
     [SerializeField]
     protected int damageReductionAdd = 0;
+    public int getDamageReductionAdd() => damageReductionAdd;
 
 
 

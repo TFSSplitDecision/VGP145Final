@@ -90,10 +90,22 @@ public abstract class Arm2 : Equipment {
     protected abstract void secondaryFireScript();
 }
 public abstract class Chest : Equipment {
-
+    private bool readyToUseAbility = false;
+    public void ChestAbility()
+    {
+        if (!readyToUseAbility) return;
+        ChestAbilityScript();
+    }
+    protected abstract void ChestAbilityScript();
 }
 public abstract class Legs : Equipment {
-
+    private bool readyToUseAbility = false;
+    public void LegsAbility()
+    {
+        if (!readyToUseAbility) return;
+        LegsAbilityScript();
+    }
+    protected abstract void LegsAbilityScript();
 }
 
 /*

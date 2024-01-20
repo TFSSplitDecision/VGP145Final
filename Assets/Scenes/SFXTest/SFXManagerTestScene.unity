@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   persistent: 0
   mixerGroup: {fileID: -5991520222266135158, guid: cb4ef924a3553e64b9281e1ef42892ea, type: 2}
-  sourceAmount: 32
+  sourceAmount: 48
   debug: 1
 --- !u!4 &765720536
 Transform:

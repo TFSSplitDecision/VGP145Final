@@ -21,7 +21,7 @@ public class SFXClip : ScriptableObject
 
     public AudioClip NextClip()
     {
-        return clips[Random.Range(0, clips.Length - 1)];
+        return clips[Random.Range(0, clips.Length)];
     }
     public float NextPitch()
     {

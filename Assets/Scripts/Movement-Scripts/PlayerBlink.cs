@@ -1,22 +1,23 @@
 using UnityEngine;
 
-public class Blink : MonoBehaviour
+public class PlayerBlink : MonoBehaviour
 {
     public float blinkDistance = 5f;
     public LayerMask enemyLayer; // Added a public variable to hold the enemy layer
-    public bool canBlink = true;
     public GameObject player;
     private Vector3 playerLocation;
+    private MovementManager movementManager;
 
     void Start()
     {
-        player = gameObject; // Changed to "gameObject" to get the reference to the GameObject this script is attached to
+        player = gameObject;
         playerLocation = player.transform.position;
+        movementManager = GetComponent<MovementManager>();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && canBlink) // left mouse button
+        if (Input.GetMouseButtonDown(0) && movementManager.canBlink) // left mouse button
         {
             Vector3 mousePosition = GetMouseWorldPosition();
             Vector3 direction = (mousePosition - transform.position).normalized;

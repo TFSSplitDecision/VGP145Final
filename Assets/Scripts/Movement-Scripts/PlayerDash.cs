@@ -1,24 +1,24 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerDash : MonoBehaviour
+public class PlayerDashDash : MonoBehaviour
 {
     public float dashSpeed = 20f;
     public float dashDistance = 5f;
     public float dashCooldownTime = 2f;
-
     public int maxDashCharges = 3;
-    private int currentDashCharges;
-
-    private bool isDashing;
+    public bool isDashing;
     private Vector3 dashDirection;
     private Vector3 dashStartPosition;
     private CharacterController charController;
+    private MovementManager movementManager;
+    
 
     private void Start()
     {
         charController = GetComponent<CharacterController>();
-        currentDashCharges = maxDashCharges;
+        movementManager = GetComponent<MovementManager>();
+        movementManager.currentDashCharges = maxDashCharges;
     }
 
     private void Update()
@@ -29,7 +29,7 @@ public class PlayerDash : MonoBehaviour
             // Debug.Log("Dash Position: " + transform.position);
         }
 
-        if (Input.GetButtonDown("Fire1") && currentDashCharges > 0 && !isDashing)
+        if (Input.GetButtonDown("Fire1") && movementManager.currentDashCharges > 0 && !movementManager.isDashing)
         {
             var mousePosition = GetMouseWorldPosition();
             mousePosition.y = transform.position.y;
@@ -40,10 +40,10 @@ public class PlayerDash : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        isDashing = true;
-        currentDashCharges--;
+        movementManager.isDashing = true;
+        movementManager.currentDashCharges--;
 
-        float dashTimer = 0f;
+        float dashTimer = 2f;
         float initialDistance = Vector3.Distance(dashStartPosition, transform.position);
 
         while (dashTimer < dashCooldownTime)
@@ -63,8 +63,8 @@ public class PlayerDash : MonoBehaviour
 
         isDashing = false;
 
-        if (currentDashCharges < maxDashCharges)
-            currentDashCharges++;
+        if (movementManager.currentDashCharges < maxDashCharges)
+            movementManager.currentDashCharges++;
     }
 
     private Vector3 GetMouseWorldPosition()

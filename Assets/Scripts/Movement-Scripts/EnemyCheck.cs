@@ -5,30 +5,30 @@ using UnityEngine;
 public class EnemyCheck : MonoBehaviour
 {
     public bool enemyDetected = false;
-    private Blink blink;
-    private Collider myCollider; // Renamed variable to avoid conflicts with the Collider class
+    private MovementManager movementManager;
+    private PlayerBlink blink;
+    private Collider myCollider;
     private LayerMask enemyLayer;
-     public float smoothFactor = 5f;
+    public float smoothFactor = 5f;
+
+    private Renderer rend; // Reference to the object's renderer component
+
+    public Color colorWhenCannotBlink = new Color(1f, 0f, 0f, 1f); // Red color when canBlink is false
+    public float alphaWhenCannotBlink = 0.5f; // Set your desired alpha value when canBlink is false
 
     void Start()
-{
-    myCollider = GetComponent<Collider>();
-
-    // Find the parent object and get the Blink component
-    blink = transform.parent.GetComponent<Blink>();
-
-    if (blink == null)
     {
-        Debug.LogError("Blink component not found on the parent object.");
+        myCollider = GetComponent<Collider>();
+        rend = GetComponent<Renderer>(); // Get the renderer component attached to the object
+
+        // Find the parent object and get components
+        movementManager = transform.parent.GetComponent<MovementManager>();
+        blink = transform.parent.GetComponent<PlayerBlink>();
+        // Assign the enemy layer to the layer mask
+        enemyLayer = LayerMask.GetMask("Enemy");
     }
 
-    // Assign the enemy layer to the layer mask
-    enemyLayer = LayerMask.GetMask("Enemy");
-}
-
     void Update()
-{
-    if (blink != null)
     {
         Vector3 dashDirection = (blink.GetMouseWorldPosition() - transform.position).normalized;
         Vector3 maxDashDistance = transform.position + dashDirection * blink.blinkDistance;
@@ -48,17 +48,27 @@ public class EnemyCheck : MonoBehaviour
             // Gradually move the collider towards the max dash distance
             myCollider.transform.position = Vector3.Lerp(myCollider.transform.position, maxDashDistance, Time.deltaTime * smoothFactor);
         }
+
+        // Check if canBlink is false and change the color and alpha accordingly
+        if (!movementManager.canBlink)
+        {
+            // Change the color and alpha of the object
+            rend.material.color = new Color(colorWhenCannotBlink.r, colorWhenCannotBlink.g, colorWhenCannotBlink.b, alphaWhenCannotBlink);
+        }
+        else
+        {
+            // Reset the color and alpha to its original state or another default color
+            rend.material.color = Color.green; // Change to the desired default color
+        }
     }
-}
 
     private void OnTriggerEnter(Collider other)
     {
-        
         if (((1 << other.gameObject.layer) & enemyLayer) != 0)
         {
             enemyDetected = true;
-            blink.canBlink = false;
-            Debug.Log("Ememy spotted");
+            movementManager.canBlink = false;
+            Debug.Log("Enemy spotted");
         }
     }
 
@@ -67,7 +77,8 @@ public class EnemyCheck : MonoBehaviour
         if (((1 << other.gameObject.layer) & enemyLayer) != 0)
         {
             enemyDetected = false;
-            blink.canBlink = true;
+            movementManager.canBlink = true;
         }
     }
 }
+

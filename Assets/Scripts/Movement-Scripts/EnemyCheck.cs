@@ -16,6 +16,8 @@ public class EnemyCheck : MonoBehaviour
     public Color colorWhenCannotBlink = new Color(1f, 0f, 0f, 1f); // Red color when canBlink is false
     public float alphaWhenCannotBlink = 0.5f; // Set your desired alpha value when canBlink is false
 
+    public float radius = 5f; // Set your desired radius here
+
     void Start()
     {
         myCollider = GetComponent<Collider>();
@@ -33,20 +35,17 @@ public class EnemyCheck : MonoBehaviour
         Vector3 dashDirection = (blink.GetMouseWorldPosition() - transform.position).normalized;
         Vector3 maxDashDistance = transform.position + dashDirection * blink.blinkDistance;
 
+        // Gradually move the collider towards the max dash distance
+        myCollider.transform.position = Vector3.Lerp(myCollider.transform.position, maxDashDistance, Time.deltaTime * smoothFactor);
+
         // Limit the position within the desired radius
         Vector3 playerToCollider = myCollider.transform.position - blink.player.transform.position;
         float distanceToPlayer = playerToCollider.magnitude;
 
-        float desiredRadius = 5f; // Set your desired radius here
-
-        if (distanceToPlayer > desiredRadius)
+        if (distanceToPlayer > radius)
         {
-            myCollider.transform.position = blink.player.transform.position + playerToCollider.normalized * desiredRadius;
-        }
-        else
-        {
-            // Gradually move the collider towards the max dash distance
-            myCollider.transform.position = Vector3.Lerp(myCollider.transform.position, maxDashDistance, Time.deltaTime * smoothFactor);
+            // If the distance exceeds the maximum, reposition within the radius
+            myCollider.transform.position = blink.player.transform.position + playerToCollider.normalized * radius;
         }
 
         // Check if canBlink is false and change the color and alpha accordingly
@@ -81,4 +80,3 @@ public class EnemyCheck : MonoBehaviour
         }
     }
 }
-

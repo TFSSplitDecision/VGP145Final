@@ -6,11 +6,7 @@ public abstract class BaseItem : ScriptableObject
 {
 
     private GameObject player;
-    
-    [SerializeField]
-    private Sprite icon;
-    public Sprite getSprite() => icon;
-
+    public Sprite icon;
     public virtual void Init(GameObject player)
     {
         this.player = player;

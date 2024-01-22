@@ -20,8 +20,6 @@ public class InventoryManager : MonoBehaviour {
     [SerializeField, ReadOnly]
     private Legs legsSlot;
 
-    private List<Equipment> allEquipment;
-
     void Start() {
         
     }
@@ -74,11 +72,8 @@ public class InventoryManager : MonoBehaviour {
         // Initialize the equipment
         // Set its owner to this gameobject
         equip.Init(gameObject);
-
-        // Update All Equipment List
-        allEquipment = new List<Equipment>() { helmetSlot, arm1Slot, arm2Slot, chestSlot, legsSlot };
-        allEquipment.RemoveAll(e => e == null);
     }
+
     public void Pickup(BaseItem item) 
     {
         if( item is Equipment )
@@ -94,19 +89,18 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
-    public float getHealthMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getHealthMultiply()); }
-    public int getHealthAdd() { return allEquipment.Aggregate(0, (acc, cur) => acc += cur.getHealthAdd()); }
-    public float getAttackSpeedMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getAttackSpeedMultiply()); }
-    public int getAttackSpeedAdd() { return allEquipment.Aggregate(0, (acc, cur) => acc += cur.getAttackSpeedAdd()); }
-    public float getAttackDamageMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getAttackDamageMultiply()); }
-    public int getAttackDamageAdd() { return allEquipment.Aggregate(0, (acc, cur) => acc += cur.getAttackDamageAdd()); }
-    public float getMoveSpeedMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getMoveSpeedMultiply()); }
-    public int getMoveSpeedAdd() { return allEquipment.Aggregate(0, (acc, cur) => acc += cur.getMoveSpeedAdd()); }
-    public float getDamageReductionMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getDamageReductionMultiply()); }
-    public int getDamageReductionAdd() { return allEquipment.Aggregate(0, (acc, cur) => acc += cur.getDamageReductionAdd()); }
-    public Sprite getHelmetSprite() => helmetSlot == null ? null : helmetSlot.getSprite();
-    public Sprite getArm1Sprite() => arm1Slot == null ? null : arm1Slot.getSprite();
-    public Sprite getArm2Sprite() => arm2Slot == null ? null : arm2Slot.getSprite();
-    public Sprite getChestSprite() => chestSlot == null ? null : chestSlot.getSprite();
-    public Sprite getLegsSprite() => legsSlot == null ? null : legsSlot.getSprite();
+    private List<Equipment> getAllEquipped() {
+        // Hm... my laziness is going to be a doomed scenario...
+        return new List<Equipment> { helmetSlot, arm1Slot, arm2Slot, chestSlot, legsSlot };
+    }
+    public float getHealthMultiply() { return getAllEquipped().Aggregate(1f, (acc, cur) => acc *= cur.getHealthMultiply()); }
+    public int getHealthAdd() { return getAllEquipped().Aggregate(0, (acc, cur) => acc += cur.getHealthAdd()); }
+    public float getAttackSpeedMultiply() { return getAllEquipped().Aggregate(1f, (acc, cur) => acc *= cur.getAttackSpeedMultiply()); }
+    public int getAttackSpeedAdd() { return getAllEquipped().Aggregate(0, (acc, cur) => acc += cur.getAttackSpeedAdd()); }
+    public float getAttackDamageMultiply() { return getAllEquipped().Aggregate(1f, (acc, cur) => acc *= cur.getAttackDamageMultiply()); }
+    public int getAttackDamageAdd() { return getAllEquipped().Aggregate(0, (acc, cur) => acc += cur.getAttackDamageAdd()); }
+    public float getMoveSpeedMultiply() { return getAllEquipped().Aggregate(1f, (acc, cur) => acc *= cur.getMoveSpeedMultiply()); }
+    public int getMoveSpeedAdd() { return getAllEquipped().Aggregate(0, (acc, cur) => acc += cur.getMoveSpeedAdd()); }
+    public float getDamageReductionMultiply() { return getAllEquipped().Aggregate(1f, (acc, cur) => acc *= cur.getDamageReductionMultiply()); }
+    public int getDamageReductionAdd() { return getAllEquipped().Aggregate(0, (acc, cur) => acc += cur.getDamageReductionAdd()); }
 }

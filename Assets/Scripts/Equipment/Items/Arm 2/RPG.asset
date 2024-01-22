@@ -26,5 +26,6 @@ MonoBehaviour:
   damageReductionAdd: 0
   attacksPerSecond: 0.25
   maxAmmo: 1
+  ammo: 0
   flatDamage: 10
   AOE_Radius: 10

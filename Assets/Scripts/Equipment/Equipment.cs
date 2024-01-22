@@ -13,6 +13,8 @@ public abstract class Equipment : BaseItem {
     // ..
     #endregion
 
+
+
     [Tooltip("What object to spawn when the equipment is dropped")]
     public GameObject dropPrefab;
 

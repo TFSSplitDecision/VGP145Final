@@ -86,4 +86,9 @@ public class InventoryManager : MonoBehaviour {
     public int getMoveSpeedAdd() { return getAllEquipped().Aggregate(0, (acc, cur) => acc += cur.getMoveSpeedAdd()); }
     public float getDamageReductionMultiply() { return getAllEquipped().Aggregate(1f, (acc, cur) => acc *= cur.getDamageReductionMultiply()); }
     public int getDamageReductionAdd() { return getAllEquipped().Aggregate(0, (acc, cur) => acc += cur.getDamageReductionAdd()); }
+    public Sprite getHelmetSprite() => helmetSlot == null ? null : helmetSlot.getSprite();
+    public Sprite getArm1Sprite() => arm1Slot == null ? null : arm1Slot.getSprite();
+    public Sprite getArm2Sprite() => arm2Slot == null ? null : arm2Slot.getSprite();
+    public Sprite getChestSprite() => chestSlot == null ? null : chestSlot.getSprite();
+    public Sprite getLegsSprite() => legsSlot == null ? null : legsSlot.getSprite();
 }

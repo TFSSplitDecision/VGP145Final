@@ -14,8 +14,9 @@ public abstract class Equipment : ScriptableObject {
     // ..
     #endregion
 
-
-    public Sprite icon;
+    [SerializeField]
+    private Sprite icon;
+    public Sprite getSprite() => icon;
 
 
     [Tooltip("What object to spawn when the equipment is dropped")]

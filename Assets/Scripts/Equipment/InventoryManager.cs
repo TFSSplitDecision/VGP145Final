@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 [RequireComponent(typeof(Collector))]
 public class InventoryManager : MonoBehaviour {
@@ -38,9 +39,10 @@ public class InventoryManager : MonoBehaviour {
             Instantiate(dropPrefab, dropPoint, Quaternion.identity);
     }
 
-    public void Pickup(Equipment equip) 
+
+    public void Pickup(Equipment equip)
     {
-        
+
         if (equip is Helmet)
         {
             Drop(helmetSlot);
@@ -60,7 +62,7 @@ public class InventoryManager : MonoBehaviour {
         {
             Drop(chestSlot);
             chestSlot = equip as Chest;
-        }  
+        }
         else if (equip is Legs)
         {
             Drop(legsSlot);
@@ -70,6 +72,21 @@ public class InventoryManager : MonoBehaviour {
         // Initialize the equipment
         // Set its owner to this gameobject
         equip.Init(gameObject);
+    }
+
+    public void Pickup(BaseItem item) 
+    {
+        if( item is Equipment )
+        {
+            Pickup(item as Equipment);
+        }
+        else if (item is Ammo)
+        {
+            if (arm2Slot == null) return;
+
+            Ammo ammo = item as Ammo;
+            arm2Slot.gainAmmo(ammo.getAmount);
+        }
     }
 
     private List<Equipment> getAllEquipped() {

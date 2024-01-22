@@ -67,13 +67,11 @@ public class SFXManager : Singleton<SFXManager>
         AudioSource source = sources[0];
         for (int i = 0; i < sources.Length; i++)
         {
-            if (sources[i].isPlaying == false)
-            {
-                source = sources[i];
-                break;
-            }
+            if (sources[i].isPlaying == false) return sources[i];
         }
-        return source;
+
+        Debug.LogWarning("Reached limit of Audio Sources. You may need to increase number of audio sources");
+        return sources[Random.Range(0, sourceAmount)];
     }
 
     /// <summary>

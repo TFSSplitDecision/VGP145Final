@@ -34,12 +34,13 @@ public class PlayerBlink : MonoBehaviour
         }
     }
 
-    public Vector3 GetMouseWorldPosition()
+    private Vector3 GetMouseWorldPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100f))
         {
+            Debug.Log(hit.collider.gameObject);
             return new Vector3(hit.point.x, transform.position.y, hit.point.z);
         }
         return Vector3.zero;

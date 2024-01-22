@@ -178,7 +178,6 @@ MonoBehaviour:
   dashDistance: 5
   dashCooldownTime: 2
   maxDashCharges: 3
-  isDashing: 0
 --- !u!114 &323670439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,8 +514,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 2.220446e-16, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 10, y: 16.090414, z: 10.109891}
+  m_Center: {x: 0, y: 3.0721827, z: -0.054944158}
 --- !u!114 &1169380937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,9 +529,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDetected: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   smoothFactor: 10
   colorWhenCannotBlink: {r: 1, g: 0, b: 0, a: 1}
   alphaWhenCannotBlink: 0.5
+  radius: 5
 --- !u!64 &1169380938
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -614,7 +617,7 @@ Transform:
   m_GameObject: {fileID: 1169380934}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.14000016, z: 1.4052386}
+  m_LocalPosition: {x: 0, y: -0.034, z: 1.407}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -648,7 +651,7 @@ Transform:
   m_GameObject: {fileID: 1440395853}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.57, y: 0.17, z: -14.67}
+  m_LocalPosition: {x: -6.57, y: 0.17, z: -3.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -845,7 +848,7 @@ Transform:
   m_GameObject: {fileID: 1692632251}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.38, y: 0.8, z: -14.68}
+  m_LocalPosition: {x: 3.38, y: 0.95, z: -14.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -934,7 +937,7 @@ GameObject:
   - component: {fileID: 1700246355}
   - component: {fileID: 1700246354}
   - component: {fileID: 1700246353}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

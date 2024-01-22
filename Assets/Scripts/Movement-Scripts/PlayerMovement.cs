@@ -37,14 +37,14 @@ public class PlayerMovement : MonoBehaviour
     {
         movementManager.isMoving = charController.velocity.magnitude > 0;
 
-        if(isMoving)
-        {
-            Debug.Log("Moving");
-        }
-        else
-        {
-            Debug.Log("Not moving");
-        }
+        // if(isMoving)
+        // {
+        //     Debug.Log("Moving");
+        // }
+        // else
+        // {
+        //     Debug.Log("Not moving");
+        // }
     }
 }
 

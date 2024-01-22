@@ -6,7 +6,16 @@ public class Collectible : MonoBehaviour
 {
 
     [Tooltip("The attached item data")]
-    public Equipment equipment;
+    [SerializeField]
+    protected BaseItem item;
+    public BaseItem getItem => item;
+
+
+    [SerializeField, Tooltip("If true, collector will automatically pickup without key press")]
+    protected bool autoCollect = false;
+
+    public bool getAutoCollect => autoCollect;
+
 
     [Tooltip("Target tag. Minimizes uncessasary trigger checks.")]
     [SerializeField]
@@ -16,7 +25,6 @@ public class Collectible : MonoBehaviour
     protected float cooldown = 1.0f;
 
 
-    public GameObject prefabTest;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +47,6 @@ public class Collectible : MonoBehaviour
     {
         // TODO: Item collection visual effects
         // TODO: Play sound
-        Instantiate(prefabTest);
     }
 
     private void OnTriggerEnter(Collider other)

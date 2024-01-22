@@ -3,19 +3,16 @@ using System.Collections;
 
 
 
-public abstract class Equipment : ScriptableObject {
+public abstract class Equipment : BaseItem {
 
     //protected Shooting shooting;
     //protected MeleeHit
 
-    private GameObject player;
 
     #region Components
     // ..
     #endregion
 
-
-    public Sprite icon;
 
 
     [Tooltip("What object to spawn when the equipment is dropped")]
@@ -69,10 +66,10 @@ public abstract class Equipment : ScriptableObject {
     }
 
 
-    public void Init( GameObject player )
+    public override void Init(GameObject player)
     {
-        this.player = player;
-        // Grab all components
+        base.Init(player);
+        // Do Equipment specific stuff here
     }
 
 }
@@ -102,6 +99,8 @@ public abstract class Arm2 : Equipment {
 
     [SerializeField]
     private int maxAmmo;
+
+    [SerializeField]
     private int ammo;
 
     [SerializeField]

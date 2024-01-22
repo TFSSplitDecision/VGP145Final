@@ -15,9 +15,14 @@ public class Collector : MonoBehaviour
     protected bool doCollect;
     private InventoryManager im;
 
+
+    protected List<Collectible> markRemoval;
+
     private void Start()
     {
         im = GetComponent<InventoryManager>();
+
+        markRemoval = new List<Collectible>();
     }
 
     /// <summary>
@@ -41,34 +46,42 @@ public class Collector : MonoBehaviour
         collectibles.Remove(collectible);
     }
 
-    /// <summary>
-    /// Decides if the collector should collect an object
-    /// </summary>
-    /// <returns></returns>
-    public bool ShouldCollect()
-    {
-        // TODO: Use player input to collect?
-        return (collectibles != null) && (collectibles.Count > 0) && Input.GetKeyDown(KeyCode.P); //I added an input line here
-    }
-
     protected void Update()
     {
-        doCollect = ShouldCollect();
-        if (doCollect)
-        {
-            doCollect = false;
+        // Guard condition to prevent null checks
+        if (collectibles == null) return;
 
-            var collectible = collectibles.FirstOrDefault<Collectible>();
-            if (collectible != null)
+        foreach ( Collectible collectible in collectibles )
+        {
+            // TODO: Clear null stuff somehow
+            if (collectible == null) continue;
+
+            bool autoCollect = collectible.getAutoCollect;
+            bool buttonPress = Input.GetKeyDown(KeyCode.P);
+            bool canCollect = collectible.CanCollect();
+
+            bool doCollect = (autoCollect | buttonPress) & canCollect;
+            if ( doCollect )
             {
-                bool canCollect = collectible.CanCollect(); 
-                if(canCollect)
-                {
-                    im.Pickup(collectible.equipment);
-                    collectibles.Remove(collectible);
-                    Destroy(collectible.gameObject);
-                }
+                im.Pickup(collectible.getItem);
+                
+                // Mark collectible for removal. Since we can't remove
+                // items while we're iterating (I think..)
+                markRemoval.Add(collectible);
+
+                Destroy(collectible.gameObject);
             }
         }
+
+        // Remove any marked collectibles from the hashset
+        if( markRemoval.Count > 0 )
+        {
+            foreach (Collectible collectible in markRemoval)
+            {
+                collectibles.Remove(collectible);
+            }
+            markRemoval.Clear();
+        }
+
     }
 }

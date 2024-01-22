@@ -119,8 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8095f285c7156164192dc69faa314a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipment: {fileID: 11400000, guid: c97015019126c2b4296be4168626c9bc, type: 2}
+  item: {fileID: 11400000, guid: c97015019126c2b4296be4168626c9bc, type: 2}
   targetTag: Player
+  prefabTest: {fileID: 0}
 --- !u!54 &3815101998024802309
 Rigidbody:
   m_ObjectHideFlags: 0

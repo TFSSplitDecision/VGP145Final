@@ -8,11 +8,17 @@ public class Tankbehaivour : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float turnSpeed;
     Rigidbody rb;
+    string targetTag;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (!target)
+            Debug.Log("No target given in Inspector");
+        else
+            targetTag = target.tag;
+        Debug.Log("Target Tag: " + targetTag);
     }
 
     // Update is called once per frame
@@ -28,5 +34,11 @@ public class Tankbehaivour : MonoBehaviour
         //transform.Translate(speed * Time.deltaTime * targetDir);
         rb.velocity = speed * targetDir;
         transform.rotation = Quaternion.LookRotation(turnDir);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(targetTag))
+            Debug.Log(targetTag + " has entered Attack Box");
     }
 }

@@ -15,10 +15,12 @@ public class Tankbehaivour : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         if (!target)
-            Debug.Log("No target given in Inspector");
+            Debug.Log("No target given");
         else
+        {
             targetTag = target.tag;
-        Debug.Log("Target Tag: " + targetTag);
+            Debug.Log("Target Tag: " + targetTag);
+        }
     }
 
     // Update is called once per frame

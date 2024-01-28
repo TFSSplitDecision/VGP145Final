@@ -13,8 +13,16 @@ public abstract class Equipment : BaseItem {
     // ..
     #endregion
 
-    [Tooltip("What object to spawn when the equipment is dropped")]
-    public GameObject dropPrefab;
+    [SerializeField, Tooltip("What object to spawn when the equipment is dropped")]
+    protected GameObject m_dropPrefab;
+    public GameObject dropPrefab => m_dropPrefab;
+
+
+
+    [SerializeField, Tooltip("Bullet data (for shooting weapons)")]
+    protected BulletData m_bullet;
+    public BulletData bullet => m_bullet;
+
 
     [Header("Health Modifiers")]
     [SerializeField]

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264da006c1fedb44983970baf8cc8241, type: 3}
+  m_Name: RPG
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  dropPrefab: {fileID: 0}
+  healthMultiply: 1
+  healthAdd: 0
+  attackSpeedMultiply: 1
+  attackSpeedAdd: 0
+  attackDamageMultiply: 1
+  attackDamageAdd: 0
+  moveSpeedMultiply: 1
+  moveSpeedAdd: 0
+  damageReductionMultiply: 1
+  damageReductionAdd: 0
+  attacksPerSecond: 0.25
+  maxAmmo: 1
+  ammo: 0
+  flatDamage: 10
+  AOE_Radius: 10

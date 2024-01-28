@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEditor.Progress;
 
 [RequireComponent(typeof(Collector))]
@@ -21,6 +22,24 @@ public class InventoryManager : MonoBehaviour {
     private Legs legsSlot;
 
     private List<Equipment> allEquipment;
+
+
+    /// <summary>
+    /// Notifies all subscribed scripts that the Arm1 slot has changed.
+    /// And it passes the Arm1 object to the subscribed scripts.
+    /// </summary>
+    [SerializeField, ReadOnly]
+    private UnityEvent<Arm1> m_onArm1Change;
+    public UnityEvent<Arm1> onArm1Change => m_onArm1Change;
+
+    /// <summary>
+    /// Notifies all subscribed scripts that the Arm2 slot has changed.
+    /// And it passes the Arm2 object to the subscribed scripts.
+    /// </summary>
+    [SerializeField, ReadOnly]
+    private UnityEvent<Arm2> m_onArm2Change;
+    public UnityEvent<Arm2> onArm2Change => m_onArm2Change;
+
 
     void Start() {
         
@@ -54,11 +73,15 @@ public class InventoryManager : MonoBehaviour {
         {
             Drop(arm1Slot);
             arm1Slot = equip as Arm1;
+            if (m_onArm1Change != null)
+                m_onArm1Change.Invoke(arm1Slot);
         }
         else if (equip is Arm2)
         {
             Drop(arm2Slot);
             arm2Slot = equip as Arm2;
+            if (m_onArm2Change != null)
+                m_onArm2Change.Invoke(arm2Slot);
         }
         else if (equip is Chest)
         {

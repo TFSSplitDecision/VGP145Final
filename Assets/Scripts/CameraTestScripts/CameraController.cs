@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,16 +24,17 @@ public class CameraController : MonoBehaviour
     //This is to get the correct angle of the camera, I initially set this to be 45
     public float cameraAngle;
 
+    //This is for camera smoothness
+    public float cameraSpeed;
+
     //Attach player object in inspector
     public GameObject playerObject;
+
+    private bool shake;
 
     void Start()
     {
         mainCamera = Camera.main;
-
-        if (mainCamera) mainCamera.transform.parent = playerObject.transform;
-
-        else if (!mainCamera) Debug.Log("Camera Has Not Been Found");
     }
 
     private void LateUpdate()
@@ -44,10 +46,32 @@ public class CameraController : MonoBehaviour
         cameraPos.x = Mathf.Clamp(playerObject.transform.position.x, minXClamp, maxXClamp);
         cameraPos.y = cameraHeight;
         cameraPos.z = Mathf.Clamp(playerObject.transform.position.z + cameraZ, minZClamp, maxZClamp);
-        transform.position = cameraPos;
+        transform.position = Vector3.Lerp(transform.position, cameraPos, cameraSpeed * Time.deltaTime);
 
         Quaternion newRotation = Quaternion.Euler(cameraAngle, 0.0f, 0.0f);
-        transform.rotation = newRotation;
+        if (!shake) transform.rotation = newRotation;
+    }
+    public IEnumerator Shake(float duration, float magnitude)
+    {
+        Vector3 originalPosition = transform.position;
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            shake = true;
+            float x = UnityEngine.Random.Range(-1.0f, 1.0f) * magnitude;
+            float y = UnityEngine.Random.Range(-1.0f, 1.0f) * magnitude;
+            float z = UnityEngine.Random.Range(-1.0f, 1.0f) * magnitude;
+
+            Vector3 shakePosition = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z + z);
+            transform.position = shakePosition;
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+        transform.position = Vector3.Lerp(transform.position, originalPosition, 0.1f);
+        shake = false;
     }
 }
 

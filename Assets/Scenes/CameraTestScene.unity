@@ -190,6 +190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cylinder (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -247,6 +251,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cylinder (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -273,6 +281,10 @@ PrefabInstance:
     - target: {fileID: 2472101182616961796, guid: 6d3f0d30409786d4c8ae6f9a12042280, type: 3}
       propertyPath: m_Name
       value: OtherCube (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472101182616961796, guid: 6d3f0d30409786d4c8ae6f9a12042280, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 2877262780058043953, guid: 6d3f0d30409786d4c8ae6f9a12042280, type: 3}
       propertyPath: m_LocalPosition.x
@@ -370,6 +382,10 @@ PrefabInstance:
     - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
       propertyPath: m_Name
       value: Cylinder (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -527,6 +543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cylinder (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -543,6 +563,10 @@ PrefabInstance:
     - target: {fileID: 2472101182616961796, guid: 6d3f0d30409786d4c8ae6f9a12042280, type: 3}
       propertyPath: m_Name
       value: OtherCube (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472101182616961796, guid: 6d3f0d30409786d4c8ae6f9a12042280, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 2877262780058043953, guid: 6d3f0d30409786d4c8ae6f9a12042280, type: 3}
       propertyPath: m_LocalPosition.x
@@ -660,7 +684,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6809789662226809816, guid: 1de54e42ffed1da4a8920a3da97db4e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -780,6 +805,7 @@ MonoBehaviour:
   cameraZ: -180
   cameraHeight: 300
   cameraAngle: 60
+  cameraSpeed: 2.5
   playerObject: {fileID: 1661561125}
 --- !u!4 &965379941 stripped
 Transform:
@@ -891,6 +917,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sphere
       objectReference: {fileID: 0}
+    - target: {fileID: 4905902841066404157, guid: 9c570b1ecc7f2304fa65cdf9c70f6078, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -947,6 +977,10 @@ PrefabInstance:
     - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
       propertyPath: m_Name
       value: Cylinder (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1005,6 +1039,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sphere (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4905902841066404157, guid: 9c570b1ecc7f2304fa65cdf9c70f6078, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1026,6 +1064,10 @@ PrefabInstance:
     - target: {fileID: 2472101182616961796, guid: 6d3f0d30409786d4c8ae6f9a12042280, type: 3}
       propertyPath: m_Name
       value: OtherCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472101182616961796, guid: 6d3f0d30409786d4c8ae6f9a12042280, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 2877262780058043953, guid: 6d3f0d30409786d4c8ae6f9a12042280, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1129,6 +1171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cylinder
       objectReference: {fileID: 0}
+    - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1185,6 +1231,10 @@ PrefabInstance:
     - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
       propertyPath: m_Name
       value: Cylinder (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1243,6 +1293,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sphere (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4905902841066404157, guid: 9c570b1ecc7f2304fa65cdf9c70f6078, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1299,6 +1353,10 @@ PrefabInstance:
     - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
       propertyPath: m_Name
       value: Cylinder (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1414,6 +1472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39558e616bc30b4f9f2b57b44f75bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraReference: {fileID: 963194229}
   speed: 100
 --- !u!1001 &1689193250
 PrefabInstance:
@@ -1466,6 +1525,10 @@ PrefabInstance:
     - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
       propertyPath: m_Name
       value: Cylinder (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1539,6 +1602,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cylinder (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1595,6 +1662,10 @@ PrefabInstance:
     - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
       propertyPath: m_Name
       value: Cylinder (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532148011997432593, guid: 7e97c1518cbfaa34cb8f4b6a1aebe950, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

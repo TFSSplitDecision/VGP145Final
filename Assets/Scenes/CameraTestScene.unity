@@ -805,7 +805,7 @@ MonoBehaviour:
   cameraZ: -180
   cameraHeight: 300
   cameraAngle: 60
-  cameraSpeed: 2.5
+  cameraSpeed: 3.5
   playerObject: {fileID: 1661561125}
 --- !u!4 &965379941 stripped
 Transform:

@@ -7,13 +7,15 @@ public class Tankbehaivour : MonoBehaviour
     [SerializeField] Transform target; 
     [SerializeField] float speed;
     [SerializeField] float turnSpeed;
-    Rigidbody rb;
+    //Rigidbody rb;
+    CharacterController cc;
     string targetTag;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        cc = GetComponent<CharacterController>();
+
         if (!target)
             Debug.Log("No target given");
         else
@@ -31,11 +33,15 @@ public class Tankbehaivour : MonoBehaviour
 
         float singleStep = turnSpeed * Time.deltaTime;
         Vector3 turnDir = Vector3.RotateTowards(transform.forward, targetDir, singleStep, 0.0f);
+
         Debug.DrawRay(transform.position, 10*turnDir, Color.red);
 
         //transform.Translate(speed * Time.deltaTime * targetDir);
-        rb.velocity = speed * targetDir;
+        //rb.velocity = speed * targetDir;
+
         transform.rotation = Quaternion.LookRotation(turnDir);
+
+        cc.Move(speed * Time.deltaTime * targetDir);
     }
 
     private void OnTriggerEnter(Collider other)

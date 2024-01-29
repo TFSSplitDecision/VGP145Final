@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030adc16eb2a0bc4c98ab5d8dac53d43, type: 3}
+  m_Name: Claymore
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  dropPrefab: {fileID: 5852083499196128712, guid: 8c1b8490f0e0a964ab6ca5ba53083d87, type: 3}
+  healthMultiply: 1
+  healthAdd: 0
+  attackSpeedMultiply: 1
+  attackSpeedAdd: 0
+  attackDamageMultiply: 1
+  attackDamageAdd: 0
+  moveSpeedMultiply: 1
+  moveSpeedAdd: 0
+  damageReductionMultiply: 1
+  damageReductionAdd: 0
+  attacksPerSecond: 0
+  flatDamage: 0

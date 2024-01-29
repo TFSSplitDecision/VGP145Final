@@ -19,7 +19,7 @@ public class Hitbox : MonoBehaviour
 
         //}
 
-        if (hurtbox != null)
+        if (hurtbox != null && !h.gameObject.CompareTag(gameObject.tag))
         {
             hm.LoseHealth(hurtbox.damage);
         }

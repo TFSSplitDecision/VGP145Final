@@ -4,49 +4,26 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Parameters")]
-    // Spawn points
     public GameObject[] spawners;
-    // Enemy prefabs
     public GameObject[] enemyPrefabs;
-
-    [SerializeField]
     private int maxWaves = 10; // Maximum number of waves
-    
-    [SerializeField]
-    private float setTimer = 10f;
-
-
-
+    private float setTimer = 20f;
    
     [Header("Variables")]
-
-    [SerializeField]
     private int waveNumber = 0;
-    [SerializeField, Range(0.0f,30.0f)]
-    private float waveTimer = 10f;
-    
-
-    // Wave timer
-    [SerializeField]
+    private float waveTimer = 20f;
     private int baseEnemyCount = 10; // Base number of enemies to spawn
-
-    [SerializeField]
     private List<GameObject> activeEnemies = new List<GameObject>();
-
-
     // Getters
     public int curEnemyCount => activeEnemies.Count;
     public int curWaveNumber => waveNumber;
-
     public float curWaveTimer => waveTimer;
-
-
     private void OnValidate()
     {
         
         if( waveNumber < 0 )
         {
-            Debug.LogError("Wave number is negative");
+           
             waveNumber = 0;
         }
         
@@ -62,14 +39,12 @@ public class EnemySpawner : MonoBehaviour
         {
             waveNumber++;
             SpawnEnemies();
-            Debug.Log("New Wave Started: Wave Number " + waveNumber);
             waveTimer = setTimer; // Reset the timer for the next wave
         }
 
 
         RemoveDestroyedEnemies();
     }
-
     void SpawnEnemies()
     {
         if (waveNumber > maxWaves) return; // Stop after maxWaves
@@ -81,7 +56,6 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemyToSpawn = SelectEnemyForWave(waveNumber);
             GameObject spawnedEnemy = Instantiate(enemyToSpawn, GetRandomSpawnerPosition(), Quaternion.identity);
             activeEnemies.Add(spawnedEnemy);
-            Debug.Log("Spawned Enemy: " + spawnedEnemy.name + " (Wave " + waveNumber + ")");
         }
     }
 

@@ -71,8 +71,9 @@ public abstract class Equipment : BaseItem {
         im = player.GetComponent<InventoryManager>();
         // Do Equipment specific stuff here
     }
-    protected virtual void onEquip() {}
-    protected virtual void onHit() {}
+    public virtual void onEquip() {}
+    public virtual void onUnequip() {}
+    public virtual void onHit() {}
 }
 public abstract class Helmet : Equipment {
 }

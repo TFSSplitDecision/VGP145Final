@@ -121,4 +121,11 @@ public abstract class Arm2 : Equipment {
     protected abstract void secondaryFireScript();
 }
 public abstract class Chest : Equipment {}
-public abstract class Legs : Equipment {}
+public abstract class Legs : Equipment {
+    private bool readyToUseAbility = false;
+    public void LegsAbility() {
+        if (!readyToUseAbility) return;
+        LegsAbilityScript();
+    }
+    protected abstract void LegsAbilityScript();
+}

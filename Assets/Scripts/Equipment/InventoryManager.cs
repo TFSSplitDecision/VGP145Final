@@ -109,4 +109,7 @@ public class InventoryManager : MonoBehaviour {
     public Sprite getArm2Sprite() => arm2Slot == null ? null : arm2Slot.getSprite();
     public Sprite getChestSprite() => chestSlot == null ? null : chestSlot.getSprite();
     public Sprite getLegsSprite() => legsSlot == null ? null : legsSlot.getSprite();
+    public void gainAmmo(int amt) {
+        arm2Slot.gainAmmo(amt);
+    }
 }

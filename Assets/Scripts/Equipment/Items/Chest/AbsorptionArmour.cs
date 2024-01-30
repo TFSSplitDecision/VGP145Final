@@ -5,7 +5,7 @@ using UnityEngine;
 public class AbsorptionArmour : Chest {
     private Coroutine cor;
     [Header("Absorption Armor"),SerializeField]
-    private float absorbPercent = 0.5f;
+    private float absorbChance = 0.5f;
     /// <summary>
     /// Absorbtion armor will set it's absorbtion value at the frame of hit (and reset it back to normal)
     /// </summary>
@@ -20,7 +20,7 @@ public class AbsorptionArmour : Chest {
     }
     private IEnumerator onHitCoroutine() {
         float dmgNorm = damageReductionMultiply;
-        if (Random.value > absorbPercent) {
+        if (Random.value <= absorbChance) {
             damageReductionMultiply = 0;
             im.gainAmmo(1);
         }

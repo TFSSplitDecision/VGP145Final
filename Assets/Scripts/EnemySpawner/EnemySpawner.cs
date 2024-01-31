@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Parameters")]
+
     public GameObject[] spawners;
     public GameObject[] enemyPrefabs;
     private int maxWaves = 10; // Maximum number of waves
@@ -33,11 +34,10 @@ public class EnemySpawner : MonoBehaviour
             waveNumber = 1;
         }
     }
-     
+
     void Update()
     {
         waveTimer -= Time.deltaTime;
-
         if (!firstWaveSpawned && waveTimer <= 0)
         {
             SpawnEnemies();
@@ -50,14 +50,12 @@ public class EnemySpawner : MonoBehaviour
             waveNumber++;
             waveTimer = setTimer;
         }
-
         RemoveDestroyedEnemies();
     }
 
     void SpawnEnemies()
     {
         if (waveNumber > maxWaves) return; // Stop after maxWaves
-
         int enemyCount = baseEnemyCount + ((waveNumber - 1) * 2); // Adjust formula for enemies
 
         for (int i = 0; i < enemyCount; i++)

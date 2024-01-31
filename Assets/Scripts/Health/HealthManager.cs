@@ -9,6 +9,12 @@ public class HealthManager : MonoBehaviour
     [HideInInspector]
     protected HealthValue healthChange;
 
+
+#if UNITY_EDITOR
+    [Header("Debugging")]
+    [SerializeField, ReadOnly] private float dbg_healthValue;
+#endif
+
     public void RestoreHealth()
     {
         health.value = 100;
@@ -32,4 +38,12 @@ public class HealthManager : MonoBehaviour
     {
         return health.value;
     }
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        dbg_healthValue = health.value;
+    }
+#endif
+
 }

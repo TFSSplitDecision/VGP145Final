@@ -10,7 +10,8 @@ public class HealthManager : MonoBehaviour
 
     private static HealthManager playerHealthManager;
 
-    public static float playerHealth => playerHealthManager.health;
+    public static float playerHealth => (playerHealthManager.health / playerHealthManager.actualMaxHealth) * 100;
+
 
 
     // Caching components
@@ -29,7 +30,7 @@ public class HealthManager : MonoBehaviour
         {
             playerHealthManager = this;
         }
-        
+
     }
 
     public void RestoreHealth()

@@ -25,12 +25,28 @@ public class Collectible : MonoBehaviour
     protected float cooldown = 1.0f;
 
 
+    #region Components Caching
+
+    private Animator animator;
+
+
+    #endregion
+
 
     // Start is called before the first frame update
     void Start()
     {
         // TODO: Ensure there's a rigid body. Make rigid body kinematic
         // TODO: Ensure that all colliders are set to trigger
+
+        // Cache components
+        animator = GetComponent<Animator>();
+
+
+        // Randomize animation offset.
+        // That way the collectibles will have a random start rotation
+        if (animator != null) 
+            animator.SetFloat("offset", Random.value);
     }
 
     /// <summary>

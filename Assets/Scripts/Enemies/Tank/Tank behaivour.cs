@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Tankbehaivour : MonoBehaviour
 {
-<<<<<<< Updated upstream
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-=======
     [SerializeField] Transform target; 
     [SerializeField] float speed;
     [SerializeField] float turnSpeed;
@@ -29,15 +23,11 @@ public class Tankbehaivour : MonoBehaviour
             targetTag = target.tag;
             Debug.Log("Target Tag: " + targetTag);
         }
->>>>>>> Stashed changes
     }
 
     // Update is called once per frame
     void Update()
     {
-<<<<<<< Updated upstream
-        
-=======
         Vector3 targetPos = new Vector3(target.position.x, 0, target.position.z);
         Vector3 targetDir = (targetPos - new Vector3(transform.position.x, 0, transform.position.z)).normalized;
 
@@ -58,6 +48,5 @@ public class Tankbehaivour : MonoBehaviour
     {
         if (other.CompareTag(targetTag))
             Debug.Log(targetTag + " has entered Attack Box");
->>>>>>> Stashed changes
     }
 }

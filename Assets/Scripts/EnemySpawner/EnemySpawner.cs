@@ -4,84 +4,65 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Parameters")]
-    // Spawn points
+
     public GameObject[] spawners;
-    // Enemy prefabs
     public GameObject[] enemyPrefabs;
-
-    [SerializeField]
     private int maxWaves = 10; // Maximum number of waves
-    
-    [SerializeField]
-    private float setTimer = 10f;
+    private float initialTimer = 10f; // Initial timer for the first wave
+    private float setTimer = 20f; // Timer for subsequent waves
 
-
-
-   
     [Header("Variables")]
-
-    [SerializeField]
-    private int waveNumber = 0;
-    [SerializeField, Range(0.0f,30.0f)]
-    private float waveTimer = 10f;
-    
-
-    // Wave timer
-    [SerializeField]
+    private int waveNumber = 1; // Start counting from wave 1
+    private float waveTimer;
+    private bool firstWaveSpawned = false;
     private int baseEnemyCount = 10; // Base number of enemies to spawn
-
-    [SerializeField]
     private List<GameObject> activeEnemies = new List<GameObject>();
-
-
     // Getters
     public int curEnemyCount => activeEnemies.Count;
     public int curWaveNumber => waveNumber;
-
     public float curWaveTimer => waveTimer;
 
+    private void Start()
+    {
+        waveTimer = initialTimer; // Set to initial timer for the first wave
+    }
 
     private void OnValidate()
     {
-        
-        if( waveNumber < 0 )
+        if (waveNumber < 1) // Ensure waveNumber is never less than 1
         {
-            Debug.LogError("Wave number is negative");
-            waveNumber = 0;
+            waveNumber = 1;
         }
-        
-
     }
 
     void Update()
     {
         waveTimer -= Time.deltaTime;
-
-
-        if (waveNumber < maxWaves && (activeEnemies.Count == 0 || waveTimer <= 0))  // checks the list if all enemies are destroyed or if the wavetimer is up
+        if (!firstWaveSpawned && waveTimer <= 0)
         {
-            waveNumber++;
             SpawnEnemies();
-            Debug.Log("New Wave Started: Wave Number " + waveNumber);
-            waveTimer = setTimer; // Reset the timer for the next wave
+            firstWaveSpawned = true;
+            waveTimer = setTimer; // Reset the timer for subsequent waves
         }
-
-
+        else if (firstWaveSpawned && waveNumber <= maxWaves && (activeEnemies.Count == 0 || waveTimer <= 0))
+        {
+            SpawnEnemies();
+            waveNumber++;
+            waveTimer = setTimer;
+        }
         RemoveDestroyedEnemies();
     }
 
     void SpawnEnemies()
     {
         if (waveNumber > maxWaves) return; // Stop after maxWaves
-
-        int enemyCount = baseEnemyCount + (waveNumber * 2); // Formula for enemies 
+        int enemyCount = baseEnemyCount + ((waveNumber - 1) * 2); // Adjust formula for enemies
 
         for (int i = 0; i < enemyCount; i++)
         {
             GameObject enemyToSpawn = SelectEnemyForWave(waveNumber);
             GameObject spawnedEnemy = Instantiate(enemyToSpawn, GetRandomSpawnerPosition(), Quaternion.identity);
             activeEnemies.Add(spawnedEnemy);
-            Debug.Log("Spawned Enemy: " + spawnedEnemy.name + " (Wave " + waveNumber + ")");
         }
     }
 

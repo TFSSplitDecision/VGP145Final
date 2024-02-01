@@ -5,6 +5,8 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
 
+
+
     [Tooltip("The attached item data")]
     [SerializeField]
     protected BaseItem item;
@@ -23,6 +25,13 @@ public class Collectible : MonoBehaviour
 
 
     protected float cooldown = 1.0f;
+
+
+    [Header("Effects")]
+
+    [SerializeField, Tooltip("Something to spawn when the item is destroyed.")] 
+    private GameObject onDeathSpawnPrefab;
+
 
 
     #region Components Caching
@@ -61,7 +70,10 @@ public class Collectible : MonoBehaviour
 
     private void OnDestroy()
     {
-        // TODO: Item collection visual effects
+        // This can spawn a visual effect
+        if(onDeathSpawnPrefab != null)
+            Instantiate(onDeathSpawnPrefab, transform.position, Quaternion.identity);
+
         // TODO: Play sound
     }
 

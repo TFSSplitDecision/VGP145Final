@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: autoCollect
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1462841929116568680, guid: 621749be1b8f4e94db8256931481b9fd, type: 3}
+      propertyPath: onDeathSpawnPrefab
+      value: 
+      objectReference: {fileID: 9017484664307500583, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
     - target: {fileID: 1807090430967159945, guid: 621749be1b8f4e94db8256931481b9fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -98,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8665732689340998550, guid: 621749be1b8f4e94db8256931481b9fd, type: 3}
       propertyPath: m_Name
-      value: Medkit Variant
+      value: Medkit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

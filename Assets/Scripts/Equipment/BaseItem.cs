@@ -17,16 +17,3 @@ public abstract class BaseItem : ScriptableObject
     }
 
 }
-
-
-[CreateAssetMenu(fileName = "Ammo", menuName = "Data/Ammo", order = 4)]
-public class Ammo : BaseItem
-{
-    InventoryManager inventoryManager;
-
-    [SerializeField]
-    private int amount = 1;
-
-    public int getAmount => amount;
-
-}

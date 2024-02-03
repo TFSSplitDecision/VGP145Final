@@ -5,14 +5,17 @@ using UnityEngine;
 //This will become part of the Player class at a future point, I presume
 public class MainAttack : MonoBehaviour
 {
-
-    // Update is called once per frame
+    ShootManager shoom;
+    void Start()
+    {
+        shoom = GetComponent<ShootManager>();
+        if (!shoom) Debug.Log("Missing the Shoot Manager component");
+    }
     void Update()
     {
         if (Input.GetButton("Fire1"))
         {
-            Debug.Log("Left Click is Being Held");
-            //Player will need to connect with heald weapon rate of fire somehow
+            shoom.LeftClickFire();
         }
     }
 }

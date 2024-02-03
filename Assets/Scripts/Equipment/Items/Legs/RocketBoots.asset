@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: RocketBoots
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  dropPrefab: {fileID: 0}
+  m_dropPrefab: {fileID: 0}
+  m_bullet: {fileID: 0}
   healthMultiply: 1
   healthAdd: 0
   attackSpeedMultiply: 1

@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private CharacterController charController;
     private MovementManager movementManager;
+    private InventoryManager inventoryManager;
     public float moveSpeed = 1f;
     public bool isMoving;
 
@@ -11,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     {
         charController = GetComponent<CharacterController>();
         movementManager = GetComponent<MovementManager>();
+        inventoryManager = GetComponent<InventoryManager>();
     }
 
     private void Update()
@@ -21,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
         }
+
+        inventoryManager.getMoveSpeedMultiply();
     }
 
     private void MovePlayer()

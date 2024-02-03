@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: SpeedBrain
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  dropPrefab: {fileID: 0}
+  m_dropPrefab: {fileID: 0}
+  m_bullet: {fileID: 0}
   healthMultiply: 1
   healthAdd: 0
   attackSpeedMultiply: 2
   attackSpeedAdd: 0
   attackDamageMultiply: 1
   attackDamageAdd: 0
-  moveSpeedMultiply: 1
+  moveSpeedMultiply: 2
   moveSpeedAdd: 0
   damageReductionMultiply: 1
   damageReductionAdd: 0

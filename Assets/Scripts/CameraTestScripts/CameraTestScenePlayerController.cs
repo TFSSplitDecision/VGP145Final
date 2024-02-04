@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraTestScenePlayerController : MonoBehaviour
 {
+    public CameraController cameraReference;
     public float speed;
     Rigidbody rb;
     SpriteRenderer sr;
@@ -22,5 +23,10 @@ public class CameraTestScenePlayerController : MonoBehaviour
 
         Vector3 moveInput = new Vector3(hInput, 0, fInput).normalized;
         rb.velocity = moveInput * speed;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+            StartCoroutine(cameraReference.Shake(0.1f, 2.0f));
     }
 }

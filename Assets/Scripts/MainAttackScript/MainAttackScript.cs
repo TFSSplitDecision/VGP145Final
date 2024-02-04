@@ -8,7 +8,7 @@ public class MainAttack : MonoBehaviour
     ShootManager shoom;
     void Start()
     {
-        shoom = GetComponent<ShootManager>();
+        shoom = FindObjectOfType<ShootManager>();
         if (!shoom) Debug.Log("Missing the Shoot Manager component");
     }
     void Update()

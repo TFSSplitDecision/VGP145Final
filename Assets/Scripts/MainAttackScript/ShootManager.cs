@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShootManager : MonoBehaviour
 {
@@ -8,27 +9,52 @@ public class ShootManager : MonoBehaviour
 
     private InventoryManager invM;
 
-    // Start is called before the first frame update
     void Start()
     {
         //need to null check A1 somehow
         invM = FindObjectOfType<InventoryManager>();
         if (!invM) Debug.Log("Shoot Manager can't find the Inventory Manager");
 
-
         invM.onArm1Change.AddListener(UpdateEquippedA1);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
+    //DefaultPistol
+    //SMG
+    //Shotgun
+    //SniperRifle
     public void LeftClickFire()
     {
-        Debug.Log("Left Click is Being Held");
-        //Would like to check data of currently equipped arm1 to know which relevent shoot script to pass it to
+        //Debug.Log("Left Click is Being Held");
+        
+        if (a1CurEquip is DefaultPistol)
+        {
+            Debug.Log("Pistol is Equipped");
+            //pass the cur equip to the Single Shot script
+        }
+
+        if (a1CurEquip is SMG)
+        {
+            Debug.Log("SMG is Equipped");
+            //pass the cur equip to the Single Shot script
+        }
+
+        if (a1CurEquip is SniperRifle)
+        {
+            Debug.Log("Sniper is Equipped");
+            //pass the cur equip to the Single Shot script
+        }
+
+        if (a1CurEquip is Shotgun)
+        {
+            Debug.Log("Shotgun is Equipped");
+            //pass the cur equip to the Spread Shot script
+        }
+
+        else
+        {
+            Debug.Log("ShootManager is unaware what Arm 1 is equipped");
+        }
     }
 
     void UpdateEquippedA1(Arm1 incoming)

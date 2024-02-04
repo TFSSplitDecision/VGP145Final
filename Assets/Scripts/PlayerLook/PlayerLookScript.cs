@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerLookScript : MonoBehaviour
 {
+
     private Camera mainCamera;
 
     void Start()
@@ -34,5 +35,4 @@ public class PlayerLookScript : MonoBehaviour
         Gizmos.DrawCube(point, Vector3.one * 0.1f);
     }
 #endif
-
 }

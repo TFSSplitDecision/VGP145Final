@@ -17,6 +17,13 @@ public class InputUtils
     private static readonly string dash = "Jump";
     private static readonly string pickup = "Enter";
 
+
+    /// <summary>
+    /// Private Constructor: Disallows the creation of instances of this script.
+    /// InputUtils is meant to be used as a public static class after all
+    /// </summary>
+    private InputUtils() { }
+
     /// <summary>
     /// Gets movement input. 
     /// Ensures that the vector doesn't have length greater than 1.

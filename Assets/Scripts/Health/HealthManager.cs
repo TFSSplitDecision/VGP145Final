@@ -3,14 +3,23 @@ using UnityEngine;
 public class HealthManager : MonoBehaviour
 {
     //protected HealthValue health;
-    [SerializeField] protected float health;
-    [SerializeField, SceneEditOnly] protected float baseMaxHealth = 100;
-    [SerializeField, ReadOnly] private float actualMaxHealth = 100;
+    [SerializeField] private float m_health;
+    public float health => m_health;
+
+
+    [SerializeField, SceneEditOnly] protected float m_baseMaxHealth = 100;
+    [SerializeField, ReadOnly] private float m_actualMaxHealth = 100;
+
+    public float maxHealth => m_actualMaxHealth;
+
+
     [HideInInspector] protected float healthChange;
 
     private static HealthManager playerHealthManager;
 
-    public static float playerHealth => (playerHealthManager.health / playerHealthManager.actualMaxHealth) * 100;
+
+    public static float playerHealth => playerHealthManager.health;
+    public static float playerMaxHealth => playerHealthManager.maxHealth;
 
 
 
@@ -20,10 +29,11 @@ public class HealthManager : MonoBehaviour
 
     private void Start()
     {
+        
         // Cache inventory manager
         inventoryManager = GetComponent<InventoryManager>();
 
-        actualMaxHealth = baseMaxHealth;
+        m_actualMaxHealth = m_baseMaxHealth;
 
 
         if( gameObject.CompareTag("Player") )
@@ -35,21 +45,21 @@ public class HealthManager : MonoBehaviour
 
     public void RestoreHealth()
     {
-        health = actualMaxHealth;
+        m_health = m_actualMaxHealth;
     }
 
     public void GainHealth(float healthChange)
     {
-        health += healthChange;
+        m_health += healthChange;
 
-        if (health > actualMaxHealth) health = actualMaxHealth;
+        if (health > m_actualMaxHealth) m_health = m_actualMaxHealth;
     }
 
     public void LoseHealth(float healthChange)
     {
-        health -= healthChange;
+        m_health -= healthChange;
 
-        if (health < 0) health = 0;
+        if (health < 0) m_health = 0;
     }
 
     public float GetHealth()
@@ -65,11 +75,11 @@ public class HealthManager : MonoBehaviour
         { 
             float maxAdd = inventoryManager.getHealthAdd();
             float maxMult = inventoryManager.getHealthMultiply();
-            actualMaxHealth = (baseMaxHealth*maxMult) + maxAdd;
+            m_actualMaxHealth = (m_baseMaxHealth * maxMult) + maxAdd;
         }
 
         // Ensure that health never goes above its limit
-        health = Mathf.Clamp(health, 0, actualMaxHealth);
+        m_health = Mathf.Clamp(health, 0, m_actualMaxHealth);
     }
 
 }

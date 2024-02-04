@@ -24,4 +24,15 @@ public class PlayerLookScript : MonoBehaviour
         mousePos.y = transform.position.y;
         return mousePos;
     }
+
+#if UNITY_EDITOR
+    // Test code. Delete on production.
+    private void OnDrawGizmos()
+    {
+        Vector3 point = GetScreenToWorld();
+        Gizmos.color = Color.green;
+        Gizmos.DrawCube(point, Vector3.one * 0.1f);
+    }
+#endif
+
 }

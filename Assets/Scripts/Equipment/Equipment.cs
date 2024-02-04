@@ -18,12 +18,6 @@ public abstract class Equipment : BaseItem {
     public GameObject dropPrefab => m_dropPrefab;
 
 
-
-    [SerializeField, Tooltip("Bullet data (for shooting weapons)")]
-    protected BulletData m_bullet;
-    public BulletData bullet => m_bullet;
-
-
     [Header("Health Modifiers")]
     [SerializeField]
     private float healthMultiply = 1;
@@ -82,14 +76,27 @@ public abstract class Equipment : BaseItem {
 public abstract class Helmet : Equipment {
 }
 
-public abstract class Arm1 : Equipment {
-    [Header("Arm 1 Values")]
+
+public abstract class Weapon : Equipment
+{
+    [SerializeField, Tooltip("Bullet prefab to spawn")]
+    protected GameObject m_bullet;
+    public GameObject bullet => m_bullet;
+
 
     [SerializeField]
-    private float attacksPerSecond;
+    protected float m_flatDamage;
+    public float flatDamage => m_flatDamage;   
 
-    [SerializeField]
-    protected float flatDamage;
+
+    protected ShotData m_shotData;
+    public ShotData shotData => m_shotData;
+
+}
+
+
+public abstract class Arm1 : Weapon{
+
     private bool readyToFire => true; // TODO: True represented by cooldown not impeeding
     public void primaryFire() {
         if (!readyToFire) return;
@@ -97,20 +104,13 @@ public abstract class Arm1 : Equipment {
     }
     protected abstract void primaryFireScript();
 }
-public abstract class Arm2 : Equipment {
-    [Header("Arm 2 Values")]
-
-    [SerializeField]
-    private float attacksPerSecond;
+public abstract class Arm2 : Weapon {
 
     [SerializeField]
     private int maxAmmo;
 
     [SerializeField]
     private int ammo;
-
-    [SerializeField]
-    protected float flatDamage;
     private bool readyToFire => ammo > 0 && true; // TODO: True represented by cooldown not impeeding
     public void secondaryFire() {
         if (!readyToFire) return;

@@ -1,31 +1,28 @@
-using System.Buffers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SpreadShot : MonoBehaviour
+/// <summary>
+/// Shoots multiple bullets in a spread angle
+/// </summary>
+public class SpreadShot : BaseShot
 {
-    public Shotgun shotgunData;
-    public BulletManager bulletManager;
-    public BulletData bulletData;
-
-    
-    public void Shoot(Shotgun shotgunData, float damage)
+    public override void Shoot(ShotData shotData, GameObject bullet, float damage)
     {
-        float stepAngle = shotgunData.spread / (shotgunData.projectiles - 1);
-        float fullAngle = -shotgunData.spread / 2f;
+        float spreadAngle = shotData.spreadAngle;
+        int bulletCount = shotData.bulletCount;
+        float bulletDamage = damage / (float)bulletCount;
 
-        for (int i = 0; i < shotgunData.projectiles; i++)
+        float stepAngle = spreadAngle / (bulletCount - 1);
+        float fullAngle = -spreadAngle / 2f;
+
+        Vector3 bulletDirection = m_transform.forward;
+        bulletDirection = Quaternion.Euler(0f, -spreadAngle, 0f) * bulletDirection;
+
+        for (int i = 0; i < bulletCount; i++)
         {
-            Quaternion bulletRotation = Quaternion.Euler(0f, fullAngle + stepAngle * i, 0f);
-            Vector3 bulletDirection = bulletRotation * transform.forward;
-
-            int damageInt = Mathf.RoundToInt(damage);
-            //damage = shotgunData.bullet.damage;
-            bulletManager.SpawnBullet(bulletDirection, shotgunData.bullet.speed, damageInt, "Player");
+            Quaternion bulletRotation = Quaternion.Euler(0f, stepAngle, 0f);
+            bulletDirection = bulletRotation * bulletDirection;
+            m_bulletManager.SpawnBullet(bulletDirection, bullet, bulletDamage);
         }
-
-        
     }
         
 }

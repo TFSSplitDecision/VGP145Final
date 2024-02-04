@@ -18,7 +18,9 @@ public interface IShot
     /// </summary>
     /// <param name="bullet"></param>
     /// <param name="damage"></param>
-    public void Shoot(BulletData bullet, float damage);
+    public void Shoot(ShotData shotData, GameObject bullet, float damage);
+
+
 
     /// <summary>
     /// Immediately stops shooting.

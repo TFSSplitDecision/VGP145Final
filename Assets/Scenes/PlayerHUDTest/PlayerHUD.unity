@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 401545468}
   - component: {fileID: 401545467}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PlayerHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2113,14 +2113,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b10a2da22b425248b65493033d6f65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaveCounter: {fileID: 1799231829}
-  WaveTimer: {fileID: 2028155305}
-  EnemyCounter: {fileID: 137786054}
-  CurHealthText: {fileID: 531940531}
-  HealthBar: {fileID: 1447689896}
-  CurAmmoText: {fileID: 46160485}
-  MaxAmmoText: {fileID: 1639465910}
-  AmmoBar: {fileID: 1813333380}
+  waveCounterText: {fileID: 1799231829}
+  waveTimerText: {fileID: 2028155305}
+  enemyCounterText: {fileID: 137786054}
+  healthBar: {fileID: 1447689896}
+  curHealthText: {fileID: 531940531}
+  curAmmoText: {fileID: 46160485}
+  maxAmmoText: {fileID: 1639465910}
+  ammoBar: {fileID: 1813333380}
 --- !u!1 &1574922444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2130,28 +2130,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1574922446}
-  - component: {fileID: 1574922445}
+  - component: {fileID: 1574922447}
   m_Layer: 0
-  m_Name: PlayerObject
+  m_Name: PlayerTestObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1574922445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574922444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11121e2ed29a9964681f65224c4b3c70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 25
 --- !u!4 &1574922446
 Transform:
   m_ObjectHideFlags: 0
@@ -2167,6 +2153,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 128004614}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1574922447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574922444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fcf239b7739c74a9515aa303101168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 11400000, guid: d5bdafd01bb9f7a419af26eafcba8e4e, type: 2}
 --- !u!1 &1639465908
 GameObject:
   m_ObjectHideFlags: 0
@@ -2540,7 +2539,7 @@ GameObject:
   - component: {fileID: 1886745601}
   - component: {fileID: 1886745602}
   m_Layer: 0
-  m_Name: WeaponSwapObject
+  m_Name: WeaponSwapTestObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2592,7 +2591,7 @@ GameObject:
   - component: {fileID: 2002556187}
   - component: {fileID: 2002556186}
   m_Layer: 0
-  m_Name: WaveSpawnerObject
+  m_Name: EnemySpawnTestObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2605,7 +2604,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002556185}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0d947efa7dfeae46893a5902dc6b224, type: 3}
   m_Name: 

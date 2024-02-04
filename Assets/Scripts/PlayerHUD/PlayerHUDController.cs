@@ -6,22 +6,22 @@ using UnityEngine.UI;
 public class PlayerHUDController : MonoBehaviour
 {
     private EnemySpawner enemySpawner;
-    private PlayerHealth playerHealth; // Pending
+    private HealthManager playerHealth;
     private WeaponSwap weaponSwap; // Pending
 
     [Header("Enemy Spawner")]
-    public Text WaveCounter;
-    public Text WaveTimer;
-    public Text EnemyCounter;
+    public Text waveCounterText;
+    public Text waveTimerText;
+    public Text enemyCounterText;
 
-    [Header("Player Health")] // Pending
-    public Text CurHealthText;
-    public Slider HealthBar;
+    [Header("Player Health")]
+    public Slider healthBar;
+    public Text curHealthText;
 
     [Header("Weapon Swap")] // Pending
-    public Text CurAmmoText;
-    public Text MaxAmmoText;
-    public Slider AmmoBar;
+    public Text curAmmoText;
+    public Text maxAmmoText;
+    public Slider ammoBar;
 
     void Start()
     {
@@ -38,14 +38,14 @@ public class PlayerHUDController : MonoBehaviour
     void InitializeReferences()
     {
         enemySpawner = FindObjectOfType<EnemySpawner>();
-        playerHealth = FindObjectOfType<PlayerHealth>();
+        playerHealth = FindObjectOfType<HealthManager>();
         weaponSwap = FindObjectOfType<WeaponSwap>();
 
         if (enemySpawner == null)
             Debug.LogError("EnemySpawner not found in the scene.");
 
         if (playerHealth == null)
-            Debug.LogError("PlayerHealth not found in the scene.");
+            Debug.LogError("HealthManager not found in the scene.");
 
         if (weaponSwap == null)
             Debug.LogError("WeaponSwap not found in the scene.");
@@ -55,9 +55,9 @@ public class PlayerHUDController : MonoBehaviour
     {
         if (enemySpawner != null)
         {
-            WaveCounter.text = Mathf.Max(0, enemySpawner.curWaveNumber).ToString();
-            WaveTimer.text = Mathf.Max(0, enemySpawner.curWaveTimer).ToString();
-            EnemyCounter.text = Mathf.Max(0, enemySpawner.curEnemyCount).ToString();
+            waveCounterText.text = Mathf.Max(0, enemySpawner.curWaveNumber).ToString();
+            waveTimerText.text = Mathf.Max(0, enemySpawner.curWaveTimer).ToString("F1");
+            enemyCounterText.text = Mathf.Max(0, enemySpawner.curEnemyCount).ToString();
         }
     }
 
@@ -65,9 +65,10 @@ public class PlayerHUDController : MonoBehaviour
     {
         if (playerHealth != null)
         {
-            playerHealth.currentHealth = Mathf.Clamp(playerHealth.currentHealth, 0, 100);
-            HealthBar.value = playerHealth.currentHealth;
-            CurHealthText.text = playerHealth.currentHealth.ToString();
+            float healthValue = Mathf.Clamp(playerHealth.GetHealth(), 0f, 100f);
+
+            healthBar.value = healthValue;
+            curHealthText.text = healthValue.ToString("F0");
         }
     }
 
@@ -77,10 +78,10 @@ public class PlayerHUDController : MonoBehaviour
         {
             (int curAmmo, int maxAmmo) = weaponSwap.GetActiveWeaponAmmo();
 
-            CurAmmoText.text = curAmmo.ToString();
-            MaxAmmoText.text = "/  " + maxAmmo.ToString();
-            AmmoBar.maxValue = maxAmmo;
-            AmmoBar.value = curAmmo;
+            curAmmoText.text = curAmmo.ToString();
+            maxAmmoText.text = "/  " + maxAmmo.ToString();
+            ammoBar.maxValue = maxAmmo;
+            ammoBar.value = curAmmo;
         }
     }
 }

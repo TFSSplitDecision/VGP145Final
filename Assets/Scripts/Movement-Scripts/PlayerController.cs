@@ -3,152 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController charController;
-    private MovementManager movementManager;
+    private CharacterController m_charController;
     public float moveSpeed = 1f;
-    public bool isMoving;
+    public bool isMoving => m_charController.velocity.magnitude > 0.0f;
+
+    [SerializeField] private Dash dash;
+
 
     private void Start()
     {
         //Movement
-        charController = GetComponent<CharacterController>();
-        movementManager = GetComponent<MovementManager>();
-        //Player look
-        mainCamera = Camera.main;
-        //Dashing
-        movementManager.currentDashCharges = maxDashCharges;
+        m_charController = GetComponent<CharacterController>();
+        //movementManager = GetComponent<MovementManager>();
 
-        StartCoroutine(Recovery());
+        // Initialize dash ability
+        dash.Init(gameObject);
+
+        
     }
+
+
 
     private void Update()
     {
-        CheckIfMoving();
+        // Movement mechanics
+
         transform.LookAt(GetScreenToWorld(), Vector3.up);
-        if(!movementManager.isDashing)
+        if (!dash.isDashing)
         {
             MovePlayer();
         }
 
-        if (movementManager.isDashing == false)
-        {
-            dashStartPosition = transform.position;
-            // Debug.Log("Dash Position: " + transform.position);
-        }
+        // TODO: Replace with InputUtils after this is merged with main
+        bool doDash = Input.GetButtonDown("Fire1");
+        if (doDash) dash.Begin();
 
-        bool buttonPressed = Input.GetButtonDown("Fire1");
-        bool hasRemainingDashes = movementManager.currentDashCharges > 0;
-        bool notDashing = !movementManager.isDashing;
-        if( buttonPressed )
-        {
-            Debug.Log("HasRemainingDashes: " + hasRemainingDashes);
-            Debug.Log("notDashing: " + notDashing);
-            if (hasRemainingDashes && notDashing)
-            {
-                var mousePosition = GetMouseWorldPosition();
-                mousePosition.y = transform.position.y;
-                dashDirection = (mousePosition - transform.position).normalized;
-                StartCoroutine(Dash());
-            }
-        }
-
-        
-        if(notDashing)
-        {
-            // Recovery
-        }
+        // Update dash logic
+        dash.Update();
     }
 
     private void MovePlayer()
     {
+        // TODO: Use Input utils after this is merged with main branch
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical) * moveSpeed;
 
-        charController.Move(movement * Time.deltaTime);
+        m_charController.Move(movement * Time.deltaTime);
     }
-    //Movement
-    private void CheckIfMoving()
-    {
-        movementManager.isMoving = charController.velocity.magnitude > 0;
-
-        // if(isMoving)
-        // {
-        //     Debug.Log("Moving");
-        // }
-        // else
-        // {
-        //     Debug.Log("Not moving");
-        // }
-    }
-    //Dash
-    private IEnumerator Dash()
-    {
-        movementManager.isDashing = true;
-        movementManager.currentDashCharges--;
-
-        float dashTimer = 0f;
-        float initialDistance = Vector3.Distance(dashStartPosition, transform.position);
-
-        while (dashTimer < dashCooldownTime)
-        {
-            Debug.Log("Entered dash loop");
-            charController.Move(dashDirection * dashSpeed * Time.deltaTime);
-
-            // Check if the player has reached or exceeded the dash distance
-            float currentDistance = Vector3.Distance(dashStartPosition, transform.position);
-            if (currentDistance >= initialDistance + dashDistance)
-            {
-                break;
-            }
-
-            dashTimer += Time.deltaTime;
-            yield return null;
-        }
-
-        movementManager.isDashing = false;
-
-        //if (movementManager.currentDashCharges < maxDashCharges)
-         //   movementManager.currentDashCharges++;
-        // StartCoroutine(Recovery() );
-    }
-
-    private IEnumerator Recovery( )
-    {
-
-        while (true)
-        {
-            if (movementManager.currentDashCharges >= maxDashCharges)
-            {
-                yield return null;
-                continue;
-            }
-
-            float delay = 3;
-            yield return new WaitForSeconds(delay);
-
-            movementManager.currentDashCharges++;
-        }
-
-    }
-
-    private Vector3 GetMouseWorldPosition()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
-        {
-            Debug.Log(hit.collider.gameObject);
-            return hit.point;
-        }
-        return Vector3.zero;
-    }
+   
     //Player look
     private Vector3 GetScreenToWorld()
     {
+        Camera camera = Camera.main;
         Vector3 inputMouse = Input.mousePosition;
-        Vector3 mousePos = mainCamera.ScreenToWorldPoint(new Vector3(inputMouse.x, inputMouse.y, mainCamera.transform.position.y));
+        Vector3 mousePos = camera.ScreenToWorldPoint(new Vector3(inputMouse.x, inputMouse.y, camera.transform.position.y));
         mousePos.y = transform.position.y;
         return mousePos;
     }

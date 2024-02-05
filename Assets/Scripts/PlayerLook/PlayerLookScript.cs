@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerLookScript : MonoBehaviour
 {
+
     private Camera mainCamera;
 
     void Start()

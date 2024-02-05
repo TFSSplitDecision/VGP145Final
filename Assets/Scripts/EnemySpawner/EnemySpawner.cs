@@ -4,7 +4,6 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Parameters")]
-
     public GameObject[] spawners;
     public GameObject[] enemyPrefabs;
     private int maxWaves = 10; // Maximum number of waves

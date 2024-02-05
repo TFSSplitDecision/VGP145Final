@@ -96,23 +96,26 @@ public abstract class Arm2 : Equipment {
     private float attacksPerSecond;
 
     [SerializeField]
-    private int maxAmmo;
+    private int m_maxAmmo;
+    public int maxAmmo => m_maxAmmo;
 
     [SerializeField]
-    private int ammo;
+    private int m_ammo;
+    public int ammo => m_ammo;
+
 
     [SerializeField]
     protected float flatDamage;
-    private bool readyToFire => ammo > 0 && true; // TODO: True represented by cooldown not impeeding
+    private bool readyToFire => m_ammo > 0 && true; // TODO: True represented by cooldown not impeeding
     public void secondaryFire() {
         if (!readyToFire) return;
         secondaryFireScript();
-        ammo--;
+        m_ammo--;
     }
     public void gainAmmo(int extraAmmo) {
-        ammo += extraAmmo;
-        if (ammo > maxAmmo)
-            ammo = maxAmmo;
+        m_ammo += extraAmmo;
+        if (m_ammo > m_maxAmmo)
+            m_ammo = m_maxAmmo;
     }
     protected abstract void secondaryFireScript();
 }

@@ -5,8 +5,6 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
 
-
-
     [Tooltip("The attached item data")]
     [SerializeField]
     protected BaseItem item;
@@ -41,7 +39,6 @@ public class Collectible : MonoBehaviour
 
     #endregion
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +70,6 @@ public class Collectible : MonoBehaviour
         // This can spawn a visual effect
         if(onDeathSpawnPrefab != null)
             Instantiate(onDeathSpawnPrefab, transform.position, Quaternion.identity);
-
         // TODO: Play sound
     }
 

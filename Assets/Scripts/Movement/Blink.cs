@@ -79,19 +79,18 @@ public class Blink
     /// <summary>
     /// This should be called by the owner everyframe
     /// </summary>
-    public void Update()
+    public void Update( Vector3 targetPoint )
     {
         m_lastBlink += Time.deltaTime;
 
         // Calculate blink target position
         Vector3 myPos = m_transform.position;
-        Vector3 mousePos = GetMouseWorldPosition();
-        Vector3 direction = (mousePos - myPos).normalized;
+        Vector3 direction = (targetPoint - myPos).normalized;
 
         m_blinkPoint = myPos + direction * m_blinkDistance;
         float maxDistance = Vector3.Distance(m_blinkPoint, myPos);
-        float actualDistance = Vector3.Distance(mousePos, myPos);
-        if (maxDistance > actualDistance) m_blinkPoint = mousePos;
+        float actualDistance = Vector3.Distance(targetPoint, myPos);
+        if (maxDistance > actualDistance) m_blinkPoint = targetPoint;
 
         // Check if its possible to blink to that position
         // Raise collider a bit up so that it doesn't accidentally hit the ground
@@ -99,20 +98,4 @@ public class Blink
         m_checkHit = Check(checkPoint, 1.0f);
     }
 
-    /// <summary>
-    /// TODO: Replace with InputUtils method to avoid duplicate code.
-    /// </summary>
-    /// <returns></returns>
-    private Vector3 GetMouseWorldPosition()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane ground = new Plane(Vector3.up, Vector3.zero);
-
-        float t = 0.0f;
-        ground.Raycast(ray, out t );
-        Vector3 point = ray.GetPoint(t);
-        point.y = m_transform.position.y;
-
-        return point;
-    }
 }

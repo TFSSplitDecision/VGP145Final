@@ -61,7 +61,7 @@ public class Dash
     /// <summary>
     /// Begins the dash ability sequence.
     /// </summary>
-    public void Begin()
+    public void Begin( Vector3 targetPoint )
     {
         // Guard conditions
         if (m_dashing) return;
@@ -72,29 +72,13 @@ public class Dash
 
         // Calculate dashing direction
         Vector3 myPos = m_transform.position;
-        Vector3 targetPos = GetMouseWorldPosition();
-        targetPos.y = myPos.y;
-        m_direction = (targetPos - myPos).normalized;
+        m_direction = (targetPoint - myPos).normalized;
 
 
         m_remainingCharges--;
         m_dashTimer = 0.0f;
     }
 
-    /// <summary>
-    /// TODO: Replace this with the implemented InputUtils, to avoid duplicate code.
-    /// </summary>
-    /// <returns></returns>
-    private Vector3 GetMouseWorldPosition()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane ground = new Plane(Vector3.up, Vector3.zero);
-
-        float t = 0.0f;
-        ground.Raycast(ray, out t);
-
-        return ray.GetPoint(t);
-    }
 
 
     /// <summary>

@@ -50,6 +50,14 @@ public class Dash
     }
 
 
+    public void Cancel()
+    {
+        m_dashing = false;
+        m_remainingCharges = m_maxCharges;
+        m_dashTimer = 0.0f;
+        m_recoveryTimer = 0.0f;
+    }
+
     /// <summary>
     /// Begins the dash ability sequence.
     /// </summary>

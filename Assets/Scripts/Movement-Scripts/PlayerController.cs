@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
+
+    public enum SpecialType { Dash = 0, Blink = 1 }
+
     private CharacterController m_charController;
     public float moveSpeed = 1f;
     public bool isMoving => m_charController.velocity.magnitude > 0.0f;
 
+
+    [SerializeField] private SpecialType m_SpecialType;
+    public SpecialType specialType => m_SpecialType;
+
+
     [SerializeField] private Dash dash;
+    [SerializeField] private Blink blink;
 
 
     private void Start()
@@ -18,8 +27,7 @@ public class PlayerController : MonoBehaviour
 
         // Initialize dash ability
         dash.Init(gameObject);
-
-        
+        blink.Init(gameObject);
     }
 
 
@@ -34,12 +42,31 @@ public class PlayerController : MonoBehaviour
             MovePlayer();
         }
 
-        // TODO: Replace with InputUtils after this is merged with main
-        bool doDash = Input.GetButtonDown("Fire1");
-        if (doDash) dash.Begin();
+        bool buttonPress = Input.GetButtonDown("Fire1");
+        switch (specialType)
+        {
+            case SpecialType.Dash:
 
-        // Update dash logic
-        dash.Update();
+                if (buttonPress)
+                    dash.Begin();
+
+                // Update dash logic
+                dash.Update();
+                break;
+
+            case SpecialType.Blink:
+
+                if (dash.isDashing)
+                    dash.Cancel();
+
+                if (buttonPress)
+                    blink.Begin();
+
+                // Update blink logic
+                blink.Update();
+                break;
+        }
+
     }
 
     private void MovePlayer()
@@ -70,6 +97,12 @@ public class PlayerController : MonoBehaviour
         Vector3 point = GetScreenToWorld();
         Gizmos.color = Color.green;
         Gizmos.DrawCube(point, Vector3.one * 0.1f);
+
+        if( specialType == SpecialType.Blink )
+        {
+            Gizmos.color = blink.checkHit ? Color.red : Color.green;
+            Gizmos.DrawCube(blink.checkPoint, Vector3.one);
+        }
     }
 #endif
 }

@@ -5394,6 +5394,7 @@ GameObject:
   - component: {fileID: 924629609}
   - component: {fileID: 924629608}
   - component: {fileID: 924629607}
+  - component: {fileID: 924629610}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5442,7 +5443,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 16.854101
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -5468,13 +5469,34 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924629606}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6427876, y: 0, z: 0, w: 0.7660445}
-  m_LocalPosition: {x: -0.32, y: 8.1, z: -1.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: -0.96, y: 169, z: -417}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2057693375}
-  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+--- !u!114 &924629610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924629606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37203d24dfef694faf740151609e8d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minXClamp: -135
+  maxXClamp: 235
+  minZClamp: -580
+  maxZClamp: -152
+  cameraZ: -115
+  cameraHeight: 200
+  cameraAngle: 60
+  cameraSpeed: 4
+  playerObject: {fileID: 2057693369}
 --- !u!1001 &928663789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12712,8 +12734,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 7.586, z: -334.3}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 924629609}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2071458927 stripped
@@ -13288,6 +13309,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 924629609}
   - {fileID: 281758038}
   - {fileID: 823366286}
   - {fileID: 2057693375}

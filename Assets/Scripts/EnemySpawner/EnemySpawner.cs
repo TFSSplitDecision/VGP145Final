@@ -1,14 +1,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
+public class WaveSpawn
+{
+    public float[] chances;
+    public int GetRandomEnemyIndex()
+    {
+        float rand = Random.value;
+        float accum = 0.0f;
+        for( int i=0; i< chances.Length; i++ )
+        {
+            if (rand < chances[i] + accum)
+                return i;
+            accum += chances[i];
+        }
+        // Fallback
+        return 0;
+    }
+}
+
 public class EnemySpawner : MonoBehaviour
 {
+
+    public WaveSpawn[] waveSpawns;
+
     [Header("Parameters")]
+
     public GameObject[] spawners;
     public GameObject[] enemyPrefabs;
-    private int maxWaves = 10; // Maximum number of waves
-    private float initialTimer = 10f; // Initial timer for the first wave
-    private float setTimer = 20f; // Timer for subsequent waves
+    [SerializeField, SceneEditOnly] private int maxWaves = 10; // Maximum number of waves
+    [SerializeField, SceneEditOnly] private float initialTimer = 10f; // Initial timer for the first wave
+    [SerializeField, SceneEditOnly] private float setTimer = 20f; // Timer for subsequent waves
+
 
     [Header("Variables")]
     private int waveNumber = 1; // Start counting from wave 1
@@ -24,26 +49,17 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         waveTimer = initialTimer; // Set to initial timer for the first wave
-    }
-
-    private void OnValidate()
-    {
-        if (waveNumber < 1) // Ensure waveNumber is never less than 1
-        {
-            waveNumber = 1;
-        }
+        waveNumber = 1;
     }
 
     void Update()
     {
         waveTimer -= Time.deltaTime;
-        if (!firstWaveSpawned && waveTimer <= 0)
-        {
-            SpawnEnemies();
-            firstWaveSpawned = true;
-            waveTimer = setTimer; // Reset the timer for subsequent waves
-        }
-        else if (firstWaveSpawned && waveNumber <= maxWaves && (activeEnemies.Count == 0 || waveTimer <= 0))
+        bool firstWave = (waveNumber == 1);
+        bool timerEnded = waveTimer <= 0;
+        bool noEnemies = activeEnemies.Count == 0;
+        bool moreWavesRemain = waveNumber <= maxWaves;
+        if (moreWavesRemain && ((firstWave && timerEnded) || (!firstWave && (timerEnded || noEnemies) )))
         {
             SpawnEnemies();
             waveNumber++;
@@ -67,26 +83,13 @@ public class EnemySpawner : MonoBehaviour
 
     GameObject SelectEnemyForWave(int waveNumber)
     {
-        if (waveNumber == 1) // Wave 1 spawns only enemy 1
-        {
-            return enemyPrefabs[0];
-        }
-        else if (waveNumber == 2) // Wave 2 spawns enemies 1 and 2 randomly
-        {
-            return enemyPrefabs[Random.Range(0, 2)];
-        }
-        else // Wave 3 and beyond
-        {
-            float randomValue = Random.value; // Generates a random number between 0.0 and 1.0
-            if (randomValue < 0.7) // 70% chance to spawn enemy 1
-            {
-                return enemyPrefabs[0];
-            }
-            else // 30% chance to spawn enemy 2 or 3
-            {
-                return enemyPrefabs[Random.Range(1, enemyPrefabs.Length)]; // Selects either enemy 2 or 3
-            }
-        }
+        if (waveNumber > waveSpawns.Length)
+            waveNumber = waveSpawns.Length;
+
+        WaveSpawn waveSpawn = waveSpawns[waveNumber-1];
+        int enemyIndex = waveSpawn.GetRandomEnemyIndex();
+        enemyIndex = Mathf.Clamp(enemyIndex, 0, enemyPrefabs.Length - 1);
+        return enemyPrefabs[enemyIndex];
     }
 
     Vector3 GetRandomSpawnerPosition()

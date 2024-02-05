@@ -22,8 +22,11 @@ public class InventoryManager : MonoBehaviour {
 
     private List<Equipment> allEquipment;
 
+    private HealthManager healthManager;
+
     void Start() {
         
+        healthManager = GetComponent<HealthManager>();
     }
 
     // Update is called once per frame
@@ -92,7 +95,26 @@ public class InventoryManager : MonoBehaviour {
             Ammo ammo = item as Ammo;
             arm2Slot.gainAmmo(ammo.getAmount);
         }
+        else if( item is HealingItem )
+        {
+            HealingItem healingItem = item as HealingItem;
+            if (healthManager != null) healthManager.GainHealth(healingItem.amount);
+        }
     }
+
+
+    public int getCurrentAmmo()
+    {
+        if (arm2Slot == null) return 0;
+        return arm2Slot.ammo;
+    }
+
+    public int getMaxAmmo()
+    {
+        if (arm2Slot == null) return 0;
+        return arm2Slot.maxAmmo;
+    }
+
 
     public float getHealthMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getHealthMultiply()); }
     public int getHealthAdd() { return allEquipment.Aggregate(0, (acc, cur) => acc += cur.getHealthAdd()); }

@@ -34,6 +34,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField, SceneEditOnly] private float initialTimer = 10f; // Initial timer for the first wave
     [SerializeField, SceneEditOnly] private float setTimer = 20f; // Timer for subsequent waves
 
+
     [Header("Variables")]
     private int waveNumber = 1; // Start counting from wave 1
     private float waveTimer;
@@ -53,20 +54,17 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-
         waveTimer -= Time.deltaTime;
         bool firstWave = (waveNumber == 1);
         bool timerEnded = waveTimer <= 0;
         bool noEnemies = activeEnemies.Count == 0;
         bool moreWavesRemain = waveNumber <= maxWaves;
-
         if (moreWavesRemain && ((firstWave && timerEnded) || (!firstWave && (timerEnded || noEnemies) )))
         {
             SpawnEnemies();
             waveNumber++;
             waveTimer = setTimer;
         }
-
         RemoveDestroyedEnemies();
     }
 
@@ -91,11 +89,7 @@ public class EnemySpawner : MonoBehaviour
         WaveSpawn waveSpawn = waveSpawns[waveNumber-1];
         int enemyIndex = waveSpawn.GetRandomEnemyIndex();
         enemyIndex = Mathf.Clamp(enemyIndex, 0, enemyPrefabs.Length - 1);
-        
-        
         return enemyPrefabs[enemyIndex];
-            
-   
     }
 
     Vector3 GetRandomSpawnerPosition()

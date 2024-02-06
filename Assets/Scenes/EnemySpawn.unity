@@ -162,6 +162,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1400bab8598f14b9a8b386b035e364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveSpawns:
+  - chances:
+    - 1
+  - chances:
+    - 0.7
+    - 0.3
+  - chances:
+    - 0.7
+    - 0.2
+    - 0.1
   spawners:
   - {fileID: 998678893}
   - {fileID: 1651148131}
@@ -173,11 +183,8 @@ MonoBehaviour:
   - {fileID: 496571855471815452, guid: c5120be4ca14de0439295668cb4c872e, type: 3}
   - {fileID: 2231118484282712370, guid: 235a68789a5ce894882a81ced023e2e0, type: 3}
   maxWaves: 10
-  setTimer: 10
-  waveNumber: 0
-  waveTimer: 30
-  baseEnemyCount: 10
-  activeEnemies: []
+  initialTimer: 10
+  setTimer: 20
 --- !u!4 &844492057
 Transform:
   m_ObjectHideFlags: 0

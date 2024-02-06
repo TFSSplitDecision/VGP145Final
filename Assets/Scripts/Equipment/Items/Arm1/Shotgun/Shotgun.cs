@@ -5,11 +5,15 @@ public class Shotgun : Arm1
 {
     [Header("Shotgun Only")]
     [SerializeField]
-    protected float spread = 60f;
+    private int m_spread = 60;
     [SerializeField]
-    protected float projectiles = 7;
+    private int m_projectiles = 7;
     protected override void primaryFireScript()
     {
         Debug.Log("Shotgun go Boom");
     }
+
+    public int spread => m_spread;
+
+    public int projectiles => m_projectiles;
 }

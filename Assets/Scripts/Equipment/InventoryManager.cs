@@ -102,6 +102,20 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
+
+    public int getCurrentAmmo()
+    {
+        if (arm2Slot == null) return 0;
+        return arm2Slot.ammo;
+    }
+
+    public int getMaxAmmo()
+    {
+        if (arm2Slot == null) return 0;
+        return arm2Slot.maxAmmo;
+    }
+
+
     public float getHealthMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getHealthMultiply()); }
     public int getHealthAdd() { return allEquipment.Aggregate(0, (acc, cur) => acc += cur.getHealthAdd()); }
     public float getAttackSpeedMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getAttackSpeedMultiply()); }

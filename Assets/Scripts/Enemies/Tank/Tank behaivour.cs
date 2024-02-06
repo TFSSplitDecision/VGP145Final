@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+<<<<<<< Updated upstream
+=======
+using UnityEngine.AI;
+>>>>>>> Stashed changes
 
 public class Tankbehaivour : MonoBehaviour
 {
@@ -10,10 +14,19 @@ public class Tankbehaivour : MonoBehaviour
     //Rigidbody rb;
     CharacterController cc;
     string targetTag;
+<<<<<<< Updated upstream
+=======
+    private NavMeshAgent agent;
+>>>>>>> Stashed changes
 
     // Start is called before the first frame update
     void Start()
     {
+<<<<<<< Updated upstream
+=======
+
+        agent = GetComponent<NavMeshAgent>();
+>>>>>>> Stashed changes
         cc = GetComponent<CharacterController>();
 
         if (!target)
@@ -23,11 +36,22 @@ public class Tankbehaivour : MonoBehaviour
             targetTag = target.tag;
             Debug.Log("Target Tag: " + targetTag);
         }
+<<<<<<< Updated upstream
+=======
+
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+>>>>>>> Stashed changes
     }
 
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
+=======
+        //Move towards the player
+        agent.SetDestination(target.position);
+        /*
+>>>>>>> Stashed changes
         Vector3 targetPos = new Vector3(target.position.x, 0, target.position.z);
         Vector3 targetDir = (targetPos - new Vector3(transform.position.x, 0, transform.position.z)).normalized;
 
@@ -42,6 +66,10 @@ public class Tankbehaivour : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(turnDir);
 
         cc.Move(speed * Time.deltaTime * targetDir);
+<<<<<<< Updated upstream
+=======
+    /*/
+>>>>>>> Stashed changes
     }
 
     private void OnTriggerEnter(Collider other)

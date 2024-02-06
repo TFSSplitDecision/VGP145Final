@@ -10,6 +10,6 @@ public class Hurtbox : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true;
+        //rb.isKinematic = true;
     }
 }

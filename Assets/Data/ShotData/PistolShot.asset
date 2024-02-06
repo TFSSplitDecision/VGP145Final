@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: TestObject
-  m_EditorClassIdentifier: Assembly-CSharp::MeleeSword
-  player: {fileID: 0}
-  icon: {fileID: 0}
-  healthMod: 0
-  lastshot: 0
-  test:
-    m_PersistentCalls:
-      m_Calls: []
+  m_Script: {fileID: 11500000, guid: 654e05b1f5b21184d83408d01e0bf625, type: 3}
+  m_Name: PistolShot
+  m_EditorClassIdentifier: 
+  m_fireRate: 0.5
+  m_bulletCount: 1
+  m_spreadAngle: 0

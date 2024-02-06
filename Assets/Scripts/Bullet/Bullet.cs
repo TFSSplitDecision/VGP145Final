@@ -8,21 +8,16 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private BulletData m_data;
 
+
+
     void Start()
     {
+        Rigidbody body = GetComponent<Rigidbody>();
+        body.AddForce(transform.forward * m_data.speed, ForceMode.VelocityChange);
+
         // Destroy bullet after a certain amount of time
         float lifetime = m_data.lifetime;
         Destroy(gameObject, lifetime);
-    }
-
-    void Update()
-    {
-        // Get data
-        Vector3 direction = transform.forward;
-        float speed = m_data.speed;
-
-        // This moves the bullet in the direction at the specified speed
-        transform.Translate(direction * speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)

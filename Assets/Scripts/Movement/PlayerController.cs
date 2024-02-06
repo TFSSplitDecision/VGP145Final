@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
+    #region Components
     private CharacterController m_charController;
+    private ShootManager m_shootManager;
+    #endregion
+
     public enum SpecialType { Dash = 0, Blink = 1 }
     [SerializeField] private SpecialType m_SpecialType;
     public SpecialType specialType => m_SpecialType;
@@ -15,10 +19,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Dash dash;
     [SerializeField] private Blink blink;
     
+
+
     private void Start()
     {
         //Movement
         m_charController = GetComponent<CharacterController>();
+        m_shootManager = GetComponent<ShootManager>();
         // Initialize dash ability
         dash.Init(gameObject);
         blink.Init(gameObject);
@@ -36,6 +43,7 @@ public class PlayerController : MonoBehaviour
         if (!dash.isDashing)
             MovePlayer();
         
+        // Special Movement mechanics
         bool buttonPress = InputUtils.dashed;
         switch (specialType)
         {
@@ -57,6 +65,10 @@ public class PlayerController : MonoBehaviour
                 blink.Update(m_lookTarget + Vector3.up);
                 break;
         }
+
+        // Shooting Mechanics
+        if (InputUtils.primaryFiring) m_shootManager.PrimaryFire();
+        if (InputUtils.secondaryFiring) m_shootManager.SecondaryFire();
 
     }
 

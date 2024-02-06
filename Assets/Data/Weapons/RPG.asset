@@ -24,8 +24,9 @@ MonoBehaviour:
   moveSpeedAdd: 0
   damageReductionMultiply: 1
   damageReductionAdd: 0
-  attacksPerSecond: 0.25
-  maxAmmo: 1
-  ammo: 0
-  flatDamage: 10
+  m_bullet: {fileID: 53365586924077739, guid: a7b0c5c38dab52a43acaacf06bf3eae7, type: 3}
+  m_shotData: {fileID: 11400000, guid: 8c009f75978655141a175fe367f4f25e, type: 2}
+  m_flatDamage: 10
+  m_maxAmmo: 3
+  m_ammo: 3
   AOE_Radius: 10

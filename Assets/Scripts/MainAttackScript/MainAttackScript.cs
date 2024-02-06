@@ -15,7 +15,7 @@ public class MainAttack : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-            shoom.LeftClickFire();
+            shoom.PrimaryFire();
         }
     }
 }

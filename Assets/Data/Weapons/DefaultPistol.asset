@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6159048a8f479845b8a1ee38830772b, type: 3}
-  m_Name: Shotgun
+  m_Script: {fileID: 11500000, guid: b51b83715751bb84aba0f8bbda863610, type: 3}
+  m_Name: DefaultPistol
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   dropPrefab: {fileID: 0}
@@ -24,7 +24,6 @@ MonoBehaviour:
   moveSpeedAdd: 0
   damageReductionMultiply: 1
   damageReductionAdd: 0
-  attacksPerSecond: 0.33
-  flatDamage: 1
-  spread: 60
-  projectiles: 7
+  m_bullet: {fileID: 53365586924077739, guid: a7b0c5c38dab52a43acaacf06bf3eae7, type: 3}
+  m_shotData: {fileID: 11400000, guid: 329c5b30ea66be04e9f025559c781cc3, type: 2}
+  m_flatDamage: 3

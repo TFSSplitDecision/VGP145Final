@@ -5,6 +5,10 @@ using UnityEngine;
 /// </summary>
 public class SpreadShot : BaseShot
 {
+    public SpreadShot(GameObject owner, BulletSpawner bulletSpawner) : base(owner, bulletSpawner)
+    {
+    }
+
     public override void Shoot(ShotData shotData, GameObject bullet, float damage)
     {
         float spreadAngle = shotData.spreadAngle;
@@ -21,7 +25,7 @@ public class SpreadShot : BaseShot
         {
             Quaternion bulletRotation = Quaternion.Euler(0f, stepAngle, 0f);
             bulletDirection = bulletRotation * bulletDirection;
-            m_bulletManager.SpawnBullet(bulletDirection, bullet, bulletDamage);
+            m_bulletSpawner.SpawnBullet(bulletDirection, bullet, bulletDamage);
         }
     }
         

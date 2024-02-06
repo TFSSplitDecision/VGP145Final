@@ -7,7 +7,7 @@ public class PlayerHUDController : MonoBehaviour
 {
     private EnemySpawner enemySpawner;
     private HealthManager playerHealth;
-    private WeaponSwap weaponSwap; // Pending
+    private InventoryManager inventoryManager;
 
     [Header("Enemy Spawner")]
     public Text waveCounterText;
@@ -17,11 +17,14 @@ public class PlayerHUDController : MonoBehaviour
     [Header("Player Health")]
     public Slider healthBar;
     public Text curHealthText;
+    public Text maxHealthText;
 
-    [Header("Weapon Swap")] // Pending
+    [Header("Inventory Manager")]
     public Text curAmmoText;
     public Text maxAmmoText;
     public Slider ammoBar;
+    public Image arm1;
+    public Image arm2;
 
     void Start()
     {
@@ -32,23 +35,23 @@ public class PlayerHUDController : MonoBehaviour
     {
         UpdateEnemySpawnerUI();
         UpdatePlayerHealthUI();
-        UpdateWeaponSwapUI();
+        UpdateWeaponUI();
     }
 
     void InitializeReferences()
     {
         enemySpawner = FindObjectOfType<EnemySpawner>();
         playerHealth = FindObjectOfType<HealthManager>();
-        weaponSwap = FindObjectOfType<WeaponSwap>();
+        inventoryManager = FindObjectOfType<InventoryManager>();
 
         if (enemySpawner == null)
-            Debug.LogError("EnemySpawner not found in the scene.");
+            Debug.Log("EnemySpawner not found in the scene.");
 
         if (playerHealth == null)
-            Debug.LogError("HealthManager not found in the scene.");
+            Debug.Log("HealthManager not found in the scene.");
 
-        if (weaponSwap == null)
-            Debug.LogError("WeaponSwap not found in the scene.");
+        if (inventoryManager == null)
+            Debug.Log("WeaponSwap not found in the scene.");
     }
 
     void UpdateEnemySpawnerUI()
@@ -65,23 +68,24 @@ public class PlayerHUDController : MonoBehaviour
     {
         if (playerHealth != null)
         {
-            float healthValue = Mathf.Clamp(playerHealth.GetHealth(), 0f, 100f);
-
+            float healthValue = Mathf.Clamp(playerHealth.health, 0f, playerHealth.maxHealth);
             healthBar.value = healthValue;
             curHealthText.text = healthValue.ToString("F0");
+            maxHealthText.text = "/ " + playerHealth.maxHealth.ToString("F0");
         }
     }
 
-    void UpdateWeaponSwapUI()
+    void UpdateWeaponUI()
     {
-        if (weaponSwap != null)
+        if (inventoryManager != null)
         {
-            (int curAmmo, int maxAmmo) = weaponSwap.GetActiveWeaponAmmo();
+            curAmmoText.text = inventoryManager.getCurrentAmmo().ToString();
+            maxAmmoText.text = "/  " + inventoryManager.getMaxAmmo().ToString();
+            ammoBar.maxValue = inventoryManager.getMaxAmmo();
+            ammoBar.value = inventoryManager.getCurrentAmmo();
 
-            curAmmoText.text = curAmmo.ToString();
-            maxAmmoText.text = "/  " + maxAmmo.ToString();
-            ammoBar.maxValue = maxAmmo;
-            ammoBar.value = curAmmo;
+            Sprite arm1 = inventoryManager.getArm1Sprite();
+            Sprite arm2 = inventoryManager.getArm1Sprite();
         }
     }
 }

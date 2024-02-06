@@ -10,39 +10,32 @@ using static UnityEditor.Progress;
 [RequireComponent(typeof(Collector))]
 public class InventoryManager : MonoBehaviour {
 
-    [SerializeField,ReadOnly]
+    [SerializeField,SceneEditOnly]
     private Helmet helmetSlot;
-    [SerializeField, ReadOnly]
+    [SerializeField, SceneEditOnly]
     private Arm1 arm1Slot;
-    [SerializeField, ReadOnly]
+    [SerializeField, SceneEditOnly]
     private Arm2 arm2Slot;
-    [SerializeField, ReadOnly]
+    [SerializeField, SceneEditOnly]
     private Chest chestSlot;
-    [SerializeField, ReadOnly]
+    [SerializeField, SceneEditOnly]
     private Legs legsSlot;
 
     private List<Equipment> allEquipment;
 
-    /// <summary>
-    /// Notifies all subscribed scripts that the Arm1 slot has changed.
-    /// And it passes the Arm1 object to the subscribed scripts.
-    /// </summary>
-    [SerializeField, ReadOnly]
-    private UnityEvent<Arm1> m_onArm1Change;
-    public UnityEvent<Arm1> onArm1Change => m_onArm1Change;
-
-    /// <summary>
-    /// Notifies all subscribed scripts that the Arm2 slot has changed.
-    /// And it passes the Arm2 object to the subscribed scripts.
-    /// </summary>
-    [SerializeField, ReadOnly]
-    private UnityEvent<Arm2> m_onArm2Change;
-    public UnityEvent<Arm2> onArm2Change => m_onArm2Change;
+    
     private HealthManager healthManager;
+    private ShootManager shootManager;
 
     void Start() {
         
         healthManager = GetComponent<HealthManager>();
+        shootManager = GetComponent<ShootManager>();
+
+        shootManager.Equip(arm1Slot);
+        shootManager.Equip(arm2Slot);
+
+        UpdateEquipment();
     }
 
     // Update is called once per frame
@@ -61,6 +54,12 @@ public class InventoryManager : MonoBehaviour {
     }
 
 
+    private void UpdateEquipment()
+    {
+        allEquipment = new List<Equipment>() { helmetSlot, arm1Slot, arm2Slot, chestSlot, legsSlot };
+        allEquipment.RemoveAll(e => e == null);
+    }
+
     public void Pickup(Equipment equip)
     {
 
@@ -73,15 +72,11 @@ public class InventoryManager : MonoBehaviour {
         {
             Drop(arm1Slot);
             arm1Slot = equip as Arm1;
-            if (m_onArm1Change != null)
-                m_onArm1Change.Invoke(arm1Slot);
         }
         else if (equip is Arm2)
         {
             Drop(arm2Slot);
             arm2Slot = equip as Arm2;
-            if (m_onArm2Change != null)
-                m_onArm2Change.Invoke(arm2Slot);
         }
         else if (equip is Chest)
         {
@@ -94,13 +89,16 @@ public class InventoryManager : MonoBehaviour {
             legsSlot = equip as Legs;
         }
 
+        // Update weapon on the shoot manager
+        if( equip is Weapon )
+            shootManager.Equip(equip as Weapon);
+
         // Initialize the equipment
         // Set its owner to this gameobject
         equip.Init(gameObject);
 
         // Update All Equipment List
-        allEquipment = new List<Equipment>() { helmetSlot, arm1Slot, arm2Slot, chestSlot, legsSlot };
-        allEquipment.RemoveAll(e => e == null);
+        UpdateEquipment();
     }
     public void Pickup(BaseItem item) 
     {

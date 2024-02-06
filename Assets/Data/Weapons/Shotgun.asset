@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409086fe291431242a309226590246b6, type: 3}
-  m_Name: StunGun
+  m_Script: {fileID: 11500000, guid: c6159048a8f479845b8a1ee38830772b, type: 3}
+  m_Name: Shotgun
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   dropPrefab: {fileID: 0}
@@ -24,7 +24,8 @@ MonoBehaviour:
   moveSpeedAdd: 0
   damageReductionMultiply: 1
   damageReductionAdd: 0
-  attacksPerSecond: 1
-  maxAmmo: 1
-  flatDamage: 0
-  Stun_AOE: 10
+  m_bullet: {fileID: 53365586924077739, guid: a7b0c5c38dab52a43acaacf06bf3eae7, type: 3}
+  m_shotData: {fileID: 11400000, guid: 3ee21ceb255ef5444b33a4ddbcaaa6ad, type: 2}
+  m_flatDamage: 3
+  m_spread: 60
+  m_projectiles: 7

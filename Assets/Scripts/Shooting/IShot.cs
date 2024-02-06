@@ -7,11 +7,6 @@ using UnityEngine;
 /// </summary>
 public interface IShot
 {
-    /// <summary>
-    /// Initializes the object.
-    /// </summary>
-    /// <param name="owner"></param>
-    public void Init(GameObject owner);
 
     /// <summary>
     /// Initiates the shooting mechanics

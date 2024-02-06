@@ -6,7 +6,8 @@ using UnityEngine;
 /// <summary>
 /// A data container that describes the mechanics of the shot.
 /// </summary>
-public class ShotData : MonoBehaviour
+[CreateAssetMenu(fileName = "ShotData", menuName = "Data/ShotData", order = 0)]
+public class ShotData : ScriptableObject
 {
 
     [SerializeField,Tooltip("How many times to fire per-second")] 

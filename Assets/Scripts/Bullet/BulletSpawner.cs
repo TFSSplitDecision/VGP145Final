@@ -46,7 +46,10 @@ public class BulletSpawner
         bullet.tag = m_owner.tag;
 
         // TODO: Get HurtBox and set damage
-        // ...
+        Hurtbox hurtbox = bullet.GetComponent<Hurtbox>();
+        if( hurtbox != null )
+            hurtbox.damage = damage;
+        
     }
 
 }

@@ -7,6 +7,7 @@ public abstract class Equipment : BaseItem {
 
     //protected Shooting shooting;
     //protected MeleeHit
+    
 
 
     #region Components
@@ -15,6 +16,7 @@ public abstract class Equipment : BaseItem {
 
     [Tooltip("What object to spawn when the equipment is dropped")]
     public GameObject dropPrefab;
+    protected InventoryManager im;
 
     [Header("Health Modifiers")]
     [SerializeField]
@@ -64,12 +66,14 @@ public abstract class Equipment : BaseItem {
     }
 
 
-    public override void Init(GameObject player)
-    {
+    public override void Init(GameObject player) {
         base.Init(player);
+        im = player.GetComponent<InventoryManager>();
         // Do Equipment specific stuff here
     }
-
+    public virtual void onEquip() {}
+    public virtual void onUnequip() {}
+    public virtual void onHit() {}
 }
 public abstract class Helmet : Equipment {
 }
@@ -119,19 +123,10 @@ public abstract class Arm2 : Equipment {
     }
     protected abstract void secondaryFireScript();
 }
-public abstract class Chest : Equipment {
-    private bool readyToUseAbility = false;
-    public void ChestAbility()
-    {
-        if (!readyToUseAbility) return;
-        ChestAbilityScript();
-    }
-    protected abstract void ChestAbilityScript();
-}
+public abstract class Chest : Equipment {}
 public abstract class Legs : Equipment {
     private bool readyToUseAbility = false;
-    public void LegsAbility()
-    {
+    public void LegsAbility() {
         if (!readyToUseAbility) return;
         LegsAbilityScript();
     }

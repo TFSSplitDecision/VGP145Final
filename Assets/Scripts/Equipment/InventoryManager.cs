@@ -1,10 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 [RequireComponent(typeof(Collector))]
 public class InventoryManager : MonoBehaviour {
@@ -37,7 +33,7 @@ public class InventoryManager : MonoBehaviour {
     protected void Drop(Equipment equip)
     {
         if (equip == null) return;
-
+        equip.onUnequip();
         Vector3 dropPoint = transform.position;
         var dropPrefab = equip.dropPrefab;
         if (dropPrefab != null)
@@ -77,6 +73,7 @@ public class InventoryManager : MonoBehaviour {
         // Initialize the equipment
         // Set its owner to this gameobject
         equip.Init(gameObject);
+        equip.onEquip();
 
         // Update All Equipment List
         allEquipment = new List<Equipment>() { helmetSlot, arm1Slot, arm2Slot, chestSlot, legsSlot };
@@ -102,7 +99,11 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
-
+    /// <summary>
+    /// To be called right before hit to potentially determine damage mitigation
+    /// </summary>
+    /// <returns></returns>
+    public void onHit() { foreach (Equipment equip in allEquipment) equip.onHit(); }
     public int getCurrentAmmo()
     {
         if (arm2Slot == null) return 0;
@@ -114,8 +115,6 @@ public class InventoryManager : MonoBehaviour {
         if (arm2Slot == null) return 0;
         return arm2Slot.maxAmmo;
     }
-
-
     public float getHealthMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getHealthMultiply()); }
     public int getHealthAdd() { return allEquipment.Aggregate(0, (acc, cur) => acc += cur.getHealthAdd()); }
     public float getAttackSpeedMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getAttackSpeedMultiply()); }
@@ -131,4 +130,7 @@ public class InventoryManager : MonoBehaviour {
     public Sprite getArm2Sprite() => arm2Slot == null ? null : arm2Slot.getSprite();
     public Sprite getChestSprite() => chestSlot == null ? null : chestSlot.getSprite();
     public Sprite getLegsSprite() => legsSlot == null ? null : legsSlot.getSprite();
+    public void gainAmmo(int amt) {
+        arm2Slot.gainAmmo(amt);
+    }
 }

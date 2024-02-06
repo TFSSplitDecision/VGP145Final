@@ -27,14 +27,6 @@ public class EnemySpawner : MonoBehaviour
     public WaveSpawn[] waveSpawns;
 
     [Header("Parameters")]
-<<<<<<< Updated upstream
-    public GameObject[] spawners;
-    public GameObject[] enemyPrefabs;
-    private int maxWaves = 10; // Maximum number of waves
-    private float initialTimer = 10f; // Initial timer for the first wave
-    private float setTimer = 20f; // Timer for subsequent waves
-
-=======
 
     public GameObject[] spawners;
     public GameObject[] enemyPrefabs;
@@ -43,7 +35,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField, SceneEditOnly] private float setTimer = 20f; // Timer for subsequent waves
 
 
->>>>>>> Stashed changes
     [Header("Variables")]
     private int waveNumber = 1; // Start counting from wave 1
     private float waveTimer;
@@ -56,38 +47,14 @@ public class EnemySpawner : MonoBehaviour
     public float curWaveTimer => waveTimer;
 
     private void Start()
-<<<<<<< Updated upstream
-    {
-        waveTimer = initialTimer; // Set to initial timer for the first wave
-    }
-
-    private void OnValidate()
-    {
-        if (waveNumber < 1) // Ensure waveNumber is never less than 1
-        {
-            waveNumber = 1;
-        }
-=======
     {
         waveTimer = initialTimer; // Set to initial timer for the first wave
         waveNumber = 1;
->>>>>>> Stashed changes
     }
 
     void Update()
     {
         waveTimer -= Time.deltaTime;
-<<<<<<< Updated upstream
-        if (!firstWaveSpawned && waveTimer <= 0)
-        {
-            SpawnEnemies();
-            firstWaveSpawned = true;
-            waveTimer = setTimer; // Reset the timer for subsequent waves
-        }
-        else if (firstWaveSpawned && waveNumber <= maxWaves && (activeEnemies.Count == 0 || waveTimer <= 0))
-        {
-            SpawnEnemies();
-=======
         bool firstWave = (waveNumber == 1);
         bool timerEnded = waveTimer <= 0;
         bool noEnemies = activeEnemies.Count == 0;
@@ -95,7 +62,6 @@ public class EnemySpawner : MonoBehaviour
         if (moreWavesRemain && ((firstWave && timerEnded) || (!firstWave && (timerEnded || noEnemies) )))
         {
             SpawnEnemies();
->>>>>>> Stashed changes
             waveNumber++;
             waveTimer = setTimer;
         }

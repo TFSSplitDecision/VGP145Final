@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 86a3f8b4f9bab7e42b0a6c4a3b3867ec, type: 3}
       propertyPath: m_Name
-      value: Astra
+      value: Player(Astra)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 86a3f8b4f9bab7e42b0a6c4a3b3867ec, type: 3}
       propertyPath: m_TagString
@@ -113,14 +113,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e83a813cfdedcb4d89b38872c920a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpecialType: 1
+  m_SpecialType: 0
   moveSpeed: 5
   dash:
     m_maxCharges: 3
-    m_dashSpeed: 14
-    m_dashDuration: 0.3
+    m_dashSpeed: 16
+    m_dashDuration: 0.35
     m_dashDistance: 12
-    m_recoveryDelay: 1
+    m_recoveryDelay: 2
     m_dashing: 0
     m_startPos: {x: 7.759079, y: 0.07999998, z: 3.4480245}
     m_direction: {x: 0.83350426, y: 0, z: 0.5525131}
@@ -128,7 +128,7 @@ MonoBehaviour:
     m_dashTimer: 0.30431366
     m_recoveryTimer: 0
   blink:
-    m_blinkDistance: 8
+    m_blinkDistance: 16
     m_blinkCooldown: 1
     m_solidLayers:
       serializedVersion: 2

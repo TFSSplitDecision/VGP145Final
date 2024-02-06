@@ -32,9 +32,6 @@ public class PlayerController : MonoBehaviour
         if (Vector3.Distance(m_lookTarget, transform.position) > 0.1f)
             transform.LookAt(m_lookTarget, Vector3.up);
 
-        // Add some vertical offset
-        m_lookTarget += Vector3.up;
-
         // Movement mechanics
         if (!dash.isDashing)
             MovePlayer();
@@ -57,7 +54,7 @@ public class PlayerController : MonoBehaviour
                 if (buttonPress)
                     blink.Begin();
                 // Update blink logic
-                blink.Update(m_lookTarget);
+                blink.Update(m_lookTarget + Vector3.up);
                 break;
         }
 
@@ -66,7 +63,7 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer()
     {
         Vector3 movement = InputUtils.move3d * moveSpeed;
-        m_charController.Move(movement * Time.deltaTime);
+        m_charController.SimpleMove(movement);
     }
     
     #if UNITY_EDITOR

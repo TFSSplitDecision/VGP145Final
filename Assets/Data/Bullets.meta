@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Data/Drops.meta
-guid: 5bc71e39a5826b043b1aed4e8cd9931d
-========
 guid: 33e8d321500c3c643990654af08a004e
->>>>>>>> main:Assets/Data/Bullets.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -23,7 +23,6 @@ public class InventoryManager : MonoBehaviour {
 
     private List<Equipment> allEquipment;
 
-
     /// <summary>
     /// Notifies all subscribed scripts that the Arm1 slot has changed.
     /// And it passes the Arm1 object to the subscribed scripts.
@@ -39,10 +38,11 @@ public class InventoryManager : MonoBehaviour {
     [SerializeField, ReadOnly]
     private UnityEvent<Arm2> m_onArm2Change;
     public UnityEvent<Arm2> onArm2Change => m_onArm2Change;
-
+    private HealthManager healthManager;
 
     void Start() {
         
+        healthManager = GetComponent<HealthManager>();
     }
 
     // Update is called once per frame
@@ -115,7 +115,26 @@ public class InventoryManager : MonoBehaviour {
             Ammo ammo = item as Ammo;
             arm2Slot.gainAmmo(ammo.getAmount);
         }
+        else if( item is HealingItem )
+        {
+            HealingItem healingItem = item as HealingItem;
+            if (healthManager != null) healthManager.GainHealth(healingItem.amount);
+        }
     }
+
+
+    public int getCurrentAmmo()
+    {
+        if (arm2Slot == null) return 0;
+        return arm2Slot.ammo;
+    }
+
+    public int getMaxAmmo()
+    {
+        if (arm2Slot == null) return 0;
+        return arm2Slot.maxAmmo;
+    }
+
 
     public float getHealthMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getHealthMultiply()); }
     public int getHealthAdd() { return allEquipment.Aggregate(0, (acc, cur) => acc += cur.getHealthAdd()); }

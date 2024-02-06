@@ -42,11 +42,9 @@ public class Blink
         m_owner = owner;
         m_transform = owner.transform;
         m_charController = owner.GetComponent<CharacterController>();
-
         m_lastBlink = 100.0f;
     }
-
-
+    
     /// <summary>
     /// Checks to see if point is occupied by another collider.
     /// Similar to EnemyCheck logic.
@@ -59,8 +57,7 @@ public class Blink
         bool hit = Physics.CheckSphere(point, size, m_solidLayers, QueryTriggerInteraction.Ignore);
         return hit;
     }
-
-
+    
     public void Begin()
     {
 

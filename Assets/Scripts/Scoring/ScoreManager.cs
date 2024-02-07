@@ -4,13 +4,35 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Singleton pattern for score manager
+
+    public static ScoreManager instance;
+
+    private int score;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    // Public function to return the current score when called
+    public int GetScore()
+    {
+        return score;
+    }
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

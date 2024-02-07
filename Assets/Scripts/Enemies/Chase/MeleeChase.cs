@@ -9,11 +9,13 @@ public class MeleeChase : MonoBehaviour
 
     public float hP;
     public float attackSpeed;
-    public NavMeshAgent agent;
+    private NavMeshAgent agent;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        player = GameObject.FindGameObjectWithTag("Player").transform; 
     }
 
     // Update is called once per frame

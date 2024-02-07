@@ -6,14 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager>
 {
-    //Do we even need to find class instead of just Canvas Object?
-    //public MainMenuController mm;
-    [HideInInspector]
-    public Canvas pm;
-    public Canvas gm;
+    public Canvas prefabmm;
+    public Canvas prefabhud;
+    public Canvas prefabpm;
+    public Canvas prefabgm;
 
-    //public Canvas prefabpm;
-    //public Canvas prefabgm;
+    Canvas mm;
+    Canvas hud;
+    Canvas pm;
+    Canvas gm;
 
     public override void Awake()
     {
@@ -29,54 +30,52 @@ public class UIManager : Singleton<UIManager>
         //Unsubscribe when UIManager is somehow disabled.
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    void Start()
-    {
-        //try
-        //{
-        //    Debug.Log(pm.gameObject.name + gm.gameObject.name);
-        //}
-        //catch (Exception e)
-        //{
-        //    //String based on exception type apparently.
-        //    Debug.Log(e.Message);
-        //}
-    }
 
-    //This is probably an anti-design pattern.
     //Don't know if LoadSceneMode matters but it's apparently a required parameter.
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log("Scene Loaded");
         if (scene != null)
         {
-            if (scene.name == "GameOverScene")
-            {
-                //Try to get GameOverMenuController.
-                gm = FindObjectOfType<Canvas>();
-                //If you can't.
-                if (gm == null)
-                {
-                    //Instantiate one.
-                    //Apparently this is unscalable but good enough for this project size.
-                    Resources.Load<GameObject>("Assets/Prefabs/MenuPrefabs/GameOverMenu");
-                    //if (gameOverMenuPrefab != null)
-                    //{
-                    //    GameObject gameOverMenuObject = Instantiate(gameOverMenuPrefab);
-                    //    gm = gameOverMenuObject.GetComponent<GameOverMenuController>();
-                    //}
-                    //else
-                    //{
-                    //    Debug.LogError("GameOverMenuPrefab is missing.");
-                    //}
-                }
-            }
+            //Don't know scenenames.
             if (scene.name == "MainMenuScene")
             {
+                mm = FindObjectOfType<Canvas>();
+                if (!mm)
+                    Instantiate(prefabmm);
+            }
+            if (scene.name == "GameScene")
+            {
+                //UIManager handles enabling and disabling.
+                pm = FindObjectOfType<Canvas>();
+                pm.gameObject.SetActive(false);
+                hud = FindObjectOfType<Canvas>();
 
+                if (!pm)
+                    Instantiate(prefabpm);
+                else if (!hud)
+                    Instantiate(prefabhud);
+            }
+            else if (scene.name == "GameOverScene")
+            {
+                gm = FindObjectOfType<Canvas>();
+                if (!gm)
+                {
+                    Instantiate(prefabgm);
+                }
             }
         }
         else
         {
             Debug.Log("Missing Scene Info");
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pm.gameObject.SetActive(true);
         }
     }
 }

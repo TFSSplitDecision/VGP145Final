@@ -19,7 +19,14 @@ public class PauseMenuController : MonoBehaviour
         //Figure out Scene Index.
         //buttons[1].onClick.AddListener(ChangeScene(sceneIndex));
     }
-    public void Pause()
+
+    private void OnEnable()
+    {
+        //This feels horrible but it's more intuitive and reusable.
+        Pause();
+    }
+
+    private void Pause()
     {
         gameObject.SetActive(true);
         Time.timeScale = 0;

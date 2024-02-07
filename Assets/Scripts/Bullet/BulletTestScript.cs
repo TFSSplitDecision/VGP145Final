@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BulletTestScript : MonoBehaviour
 {
+
+    public GameObject bulletPrefab;
+
     public BulletManager bulletManager;
     public float testInterval = 2f; // Time in seconds between test bullet spawns
     public float bulletSpeed = 10f;
@@ -55,7 +58,7 @@ public class BulletTestScript : MonoBehaviour
                 break;
         }
 
-        bulletManager.SpawnBullet(direction, bulletSpeed, bulletDamage, ownerTag);
+        bulletManager.SpawnBullet(direction, bulletPrefab, bulletDamage);
 
         testPhase = (testPhase + 1) % 4; // Cycle through test phases
     }

@@ -71,17 +71,27 @@ public abstract class Equipment : BaseItem {
     }
 
 }
-public abstract class Helmet : Equipment {
+public abstract class Helmet : Equipment 
+{
 }
 
-public abstract class Arm1 : Equipment {
-    [Header("Arm 1 Values")]
+public abstract class Weapon : Equipment{
 
-    [SerializeField]
-    private float attacksPerSecond;
 
-    [SerializeField]
-    protected float flatDamage;
+    [SerializeField] private GameObject m_bullet;
+    public GameObject bullet => m_bullet;
+
+    [SerializeField] private ShotData m_shotData;
+    public ShotData shotData => m_shotData;
+
+    [SerializeField] private float m_flatDamage;
+
+    public float flatDamage => m_flatDamage;
+
+}
+
+public abstract class Arm1 : Weapon {
+
     private bool readyToFire => true; // TODO: True represented by cooldown not impeeding
     public void primaryFire() {
         if (!readyToFire) return;
@@ -89,30 +99,27 @@ public abstract class Arm1 : Equipment {
     }
     protected abstract void primaryFireScript();
 }
-public abstract class Arm2 : Equipment {
-    [Header("Arm 2 Values")]
+public abstract class Arm2 : Weapon{
+
 
     [SerializeField]
-    private float attacksPerSecond;
+    private int m_maxAmmo;
+    public int maxAmmo => m_maxAmmo;
 
     [SerializeField]
-    private int maxAmmo;
+    private int m_ammo;
+    public int ammo => m_ammo;
 
-    [SerializeField]
-    private int ammo;
-
-    [SerializeField]
-    protected float flatDamage;
-    private bool readyToFire => ammo > 0 && true; // TODO: True represented by cooldown not impeeding
+    private bool readyToFire => m_ammo > 0 && true; // TODO: True represented by cooldown not impeeding
     public void secondaryFire() {
         if (!readyToFire) return;
         secondaryFireScript();
-        ammo--;
+        m_ammo--;
     }
     public void gainAmmo(int extraAmmo) {
-        ammo += extraAmmo;
-        if (ammo > maxAmmo)
-            ammo = maxAmmo;
+        m_ammo += extraAmmo;
+        if (m_ammo > m_maxAmmo)
+            m_ammo = m_maxAmmo;
     }
     protected abstract void secondaryFireScript();
 }

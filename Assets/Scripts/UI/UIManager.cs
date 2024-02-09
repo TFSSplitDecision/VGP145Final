@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager>
 {
+    //Main Menu, HUD, Pause Menu, Game Over Menu
     public Canvas prefabmm;
     public Canvas prefabhud;
     public Canvas prefabpm;
@@ -48,13 +49,13 @@ public class UIManager : Singleton<UIManager>
             {
                 //UIManager handles enabling and disabling.
                 pm = FindObjectOfType<Canvas>();
-                pm.gameObject.SetActive(false);
-                hud = FindObjectOfType<Canvas>();
-
                 if (!pm)
-                    Instantiate(prefabpm);
-                else if (!hud)
-                    Instantiate(prefabhud);
+                    pm = Instantiate(prefabpm);
+                pm.gameObject.SetActive(false);
+
+                hud = FindObjectOfType<Canvas>();
+                if (!hud)
+                    hud = Instantiate(prefabhud);
             }
             else if (scene.name == "GameOverScene")
             {
@@ -73,7 +74,7 @@ public class UIManager : Singleton<UIManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && pm)
         {
             pm.gameObject.SetActive(true);
         }

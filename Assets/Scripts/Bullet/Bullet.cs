@@ -9,7 +9,6 @@ public class Bullet : MonoBehaviour
     private BulletData m_data;
 
 
-
     void Start()
     {
         Rigidbody body = GetComponent<Rigidbody>();
@@ -20,13 +19,14 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, lifetime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        // Note: Hurting will be handled with a diffent script
-        if (collision.gameObject.CompareTag("Wall"))
+        // Ignore objects with the same tags
+        if( other.CompareTag(gameObject.tag) )
         {
-            Debug.Log("Bullet hit a wall");
+            return;
         }
+
         Destroy(gameObject);
     }
 }

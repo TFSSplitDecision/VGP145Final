@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 654e05b1f5b21184d83408d01e0bf625, type: 3}
-  m_Name: SPreadFire
+  m_Name: LaserFire
   m_EditorClassIdentifier: 
-  m_fireRate: 1
-  m_bulletCount: 7
-  m_spreadAngle: 60
+  m_fireRate: 0.1
+  m_bulletCount: 1
+  m_spreadAngle: 0

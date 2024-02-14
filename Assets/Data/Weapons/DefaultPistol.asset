@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51b83715751bb84aba0f8bbda863610, type: 3}
+  m_Name: DefaultPistol
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  dropPrefab: {fileID: 0}
+  healthMultiply: 1
+  healthAdd: 0
+  attackSpeedMultiply: 1
+  attackSpeedAdd: 0
+  attackDamageMultiply: 1
+  attackDamageAdd: 0
+  moveSpeedMultiply: 1
+  moveSpeedAdd: 0
+  damageReductionMultiply: 1
+  damageReductionAdd: 0
+  m_bullet: {fileID: 53365586924077739, guid: a7b0c5c38dab52a43acaacf06bf3eae7, type: 3}
+  m_shotData: {fileID: 11400000, guid: 329c5b30ea66be04e9f025559c781cc3, type: 2}
+  m_flatDamage: 3

@@ -10,19 +10,18 @@ using static UnityEditor.Progress;
 [RequireComponent(typeof(Collector))]
 public class InventoryManager : MonoBehaviour {
 
-    [SerializeField,ReadOnly]
+    [SerializeField,SceneEditOnly]
     private Helmet helmetSlot;
-    [SerializeField, ReadOnly]
+    [SerializeField, SceneEditOnly]
     private Arm1 arm1Slot;
-    [SerializeField, ReadOnly]
+    [SerializeField, SceneEditOnly]
     private Arm2 arm2Slot;
-    [SerializeField, ReadOnly]
+    [SerializeField, SceneEditOnly]
     private Chest chestSlot;
-    [SerializeField, ReadOnly]
+    [SerializeField, SceneEditOnly]
     private Legs legsSlot;
 
     private List<Equipment> allEquipment;
-
 
     /// <summary>
     /// Notifies all subscribed scripts that the Arm1 slot has changed.
@@ -39,10 +38,19 @@ public class InventoryManager : MonoBehaviour {
     [SerializeField, ReadOnly]
     private UnityEvent<Arm2> m_onArm2Change;
     public UnityEvent<Arm2> onArm2Change => m_onArm2Change;
-
+    
+    private HealthManager healthManager;
+    private ShootManager shootManager;
 
     void Start() {
         
+        healthManager = GetComponent<HealthManager>();
+        shootManager = GetComponent<ShootManager>();
+
+        shootManager.Equip(arm1Slot);
+        shootManager.Equip(arm2Slot);
+
+        UpdateEquipment();
     }
 
     // Update is called once per frame
@@ -60,6 +68,12 @@ public class InventoryManager : MonoBehaviour {
             Instantiate(dropPrefab, dropPoint, Quaternion.identity);
     }
 
+
+    private void UpdateEquipment()
+    {
+        allEquipment = new List<Equipment>() { helmetSlot, arm1Slot, arm2Slot, chestSlot, legsSlot };
+        allEquipment.RemoveAll(e => e == null);
+    }
 
     public void Pickup(Equipment equip)
     {
@@ -94,13 +108,16 @@ public class InventoryManager : MonoBehaviour {
             legsSlot = equip as Legs;
         }
 
+        // Update weapon on the shoot manager
+        if( equip is Weapon )
+            shootManager.Equip(equip as Weapon);
+
         // Initialize the equipment
         // Set its owner to this gameobject
         equip.Init(gameObject);
 
         // Update All Equipment List
-        allEquipment = new List<Equipment>() { helmetSlot, arm1Slot, arm2Slot, chestSlot, legsSlot };
-        allEquipment.RemoveAll(e => e == null);
+        UpdateEquipment();
     }
     public void Pickup(BaseItem item) 
     {
@@ -115,7 +132,26 @@ public class InventoryManager : MonoBehaviour {
             Ammo ammo = item as Ammo;
             arm2Slot.gainAmmo(ammo.getAmount);
         }
+        else if( item is HealingItem )
+        {
+            HealingItem healingItem = item as HealingItem;
+            if (healthManager != null) healthManager.GainHealth(healingItem.amount);
+        }
     }
+
+
+    public int getCurrentAmmo()
+    {
+        if (arm2Slot == null) return 0;
+        return arm2Slot.ammo;
+    }
+
+    public int getMaxAmmo()
+    {
+        if (arm2Slot == null) return 0;
+        return arm2Slot.maxAmmo;
+    }
+
 
     public float getHealthMultiply() { return allEquipment.Aggregate(1f, (acc, cur) => acc *= cur.getHealthMultiply()); }
     public int getHealthAdd() { return allEquipment.Aggregate(0, (acc, cur) => acc += cur.getHealthAdd()); }

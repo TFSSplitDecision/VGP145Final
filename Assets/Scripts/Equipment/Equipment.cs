@@ -13,10 +13,8 @@ public abstract class Equipment : BaseItem {
     // ..
     #endregion
 
-    [SerializeField, Tooltip("What object to spawn when the equipment is dropped")]
-    protected GameObject m_dropPrefab;
-    public GameObject dropPrefab => m_dropPrefab;
-
+    [Tooltip("What object to spawn when the equipment is dropped")]
+    public GameObject dropPrefab;
 
     [Header("Health Modifiers")]
     [SerializeField]
@@ -73,29 +71,26 @@ public abstract class Equipment : BaseItem {
     }
 
 }
-public abstract class Helmet : Equipment {
+public abstract class Helmet : Equipment 
+{
 }
 
+public abstract class Weapon : Equipment{
 
-public abstract class Weapon : Equipment
-{
-    [SerializeField, Tooltip("Bullet prefab to spawn")]
-    protected GameObject m_bullet;
+
+    [SerializeField] private GameObject m_bullet;
     public GameObject bullet => m_bullet;
 
-
-    [SerializeField]
-    protected float m_flatDamage;
-    public float flatDamage => m_flatDamage;   
-
-
-    protected ShotData m_shotData;
+    [SerializeField] private ShotData m_shotData;
     public ShotData shotData => m_shotData;
+
+    [SerializeField] private float m_flatDamage;
+
+    public float flatDamage => m_flatDamage;
 
 }
 
-
-public abstract class Arm1 : Weapon{
+public abstract class Arm1 : Weapon {
 
     private bool readyToFire => true; // TODO: True represented by cooldown not impeeding
     public void primaryFire() {
@@ -104,23 +99,27 @@ public abstract class Arm1 : Weapon{
     }
     protected abstract void primaryFireScript();
 }
-public abstract class Arm2 : Weapon {
+public abstract class Arm2 : Weapon{
+
 
     [SerializeField]
-    private int maxAmmo;
+    private int m_maxAmmo;
+    public int maxAmmo => m_maxAmmo;
 
     [SerializeField]
-    private int ammo;
-    private bool readyToFire => ammo > 0 && true; // TODO: True represented by cooldown not impeeding
+    private int m_ammo;
+    public int ammo => m_ammo;
+
+    private bool readyToFire => m_ammo > 0 && true; // TODO: True represented by cooldown not impeeding
     public void secondaryFire() {
         if (!readyToFire) return;
         secondaryFireScript();
-        ammo--;
+        m_ammo--;
     }
     public void gainAmmo(int extraAmmo) {
-        ammo += extraAmmo;
-        if (ammo > maxAmmo)
-            ammo = maxAmmo;
+        m_ammo += extraAmmo;
+        if (m_ammo > m_maxAmmo)
+            m_ammo = m_maxAmmo;
     }
     protected abstract void secondaryFireScript();
 }

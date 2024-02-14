@@ -25,13 +25,25 @@ public class Bullet : MonoBehaviour
         transform.Translate(direction * speed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        // Note: Hurting will be handled with a diffent script
-        if (collision.gameObject.CompareTag("Wall"))
+        // Ignore anything that is the same tag
+        if( other.CompareTag(gameObject.tag))
         {
-            Debug.Log("Bullet hit a wall");
+            return;
         }
+        // Otherwise Destroy
         Destroy(gameObject);
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    // Note: Hurting will be handled with a diffent script
+    //    if (collision.gameObject.CompareTag("Wall"))
+    //    {
+    //        Debug.Log("Bullet hit a wall");
+    //    }
+    //    Destroy(gameObject);
+    //}
 }

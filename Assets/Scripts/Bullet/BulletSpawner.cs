@@ -42,6 +42,8 @@ public class BulletSpawner
         // Creates the bullet
         GameObject bullet = GameObject.Instantiate(prefab, spawnPoint, spawnRotation);
 
+        //Debug.DrawRay(spawnPoint, bullet.transform.forward, Color.red, 0.3f);
+
         // Give the bullet your tag, so it discerns what to hurt
         bullet.tag = m_owner.tag;
 

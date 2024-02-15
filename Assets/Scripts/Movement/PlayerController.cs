@@ -18,17 +18,37 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Dash dash;
     [SerializeField] private Blink blink;
-    
 
+    public AudioClip dashSound; // Dash sound effect
+    private AudioSource audioSource; 
 
     private void Start()
     {
+        // Get or add AudioSource component to the PlayerController GameObject
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
         //Movement
         m_charController = GetComponent<CharacterController>();
         m_shootManager = GetComponent<ShootManager>();
         // Initialize dash ability
         dash.Init(gameObject);
+
+        // Call the OnDashActivated event and play the dash sound effect
+        dash.OnDashActivated += PlayDashSound;
+
         blink.Init(gameObject);
+    }
+
+    private void PlayDashSound()
+    {
+        if (dashSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(dashSound);
+        }
     }
 
     private void Update()
@@ -50,7 +70,7 @@ public class PlayerController : MonoBehaviour
             case SpecialType.Dash:
 
                 if (buttonPress)
-                    dash.Begin(m_lookTarget);
+                    dash.Begin(m_lookTarget);// Debug.Log("dash is in dash");
                 // Update dash logic
                 dash.Update();
                 break;
@@ -60,7 +80,7 @@ public class PlayerController : MonoBehaviour
                 if (dash.isDashing)
                     dash.Cancel();
                 if (buttonPress)
-                    blink.Begin();
+                    blink.Begin(); //Debug.Log("dash is in blink");
                 // Update blink logic
                 blink.Update(m_lookTarget + Vector3.up);
                 break;

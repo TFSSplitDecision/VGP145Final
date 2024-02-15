@@ -11,6 +11,8 @@ public class ShootManager : MonoBehaviour
 
     private SingleShot singleShot;
     private SpreadShot spreadShot;
+    private LaserShot laserShot;
+
     private BulletSpawner m_bulletSpawner;
     private InventoryManager m_inventory;
 
@@ -40,7 +42,7 @@ public class ShootManager : MonoBehaviour
         m_bulletSpawner = new BulletSpawner(gameObject, m_shootPoint);
         singleShot = new SingleShot(gameObject, m_bulletSpawner);
         spreadShot = new SpreadShot(gameObject, m_bulletSpawner);
-
+        laserShot = new LaserShot(gameObject, m_bulletSpawner);
 
         m_lastFire1 = 100.0f;
         m_lastFire2 = 100.0f;
@@ -88,6 +90,9 @@ public class ShootManager : MonoBehaviour
         BaseShot shot = singleShot;
         float spreadAngle = shotData.spreadAngle;
         if (spreadAngle > 5.0f) shot = spreadShot;
+
+        // Special case if laser type
+        if (weapon is Laser) shot = laserShot;
 
         // Execute the shot
         shot.Shoot(shotData, bullet, damage);

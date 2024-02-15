@@ -26,6 +26,6 @@ MonoBehaviour:
   damageReductionAdd: 0
   m_bullet: {fileID: 53365586924077739, guid: a7b0c5c38dab52a43acaacf06bf3eae7, type: 3}
   m_shotData: {fileID: 11400000, guid: 3ee21ceb255ef5444b33a4ddbcaaa6ad, type: 2}
-  m_flatDamage: 3
+  m_flatDamage: 7
   m_spread: 60
   m_projectiles: 7

@@ -249,8 +249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helmetSlot: {fileID: 0}
-  arm1Slot: {fileID: 11400000, guid: fd7759458d9cd35459b707ebbb03518d, type: 2}
-  arm2Slot: {fileID: 11400000, guid: 52f89a211d2f1a54cb3a1bd6375645e9, type: 2}
+  arm1Slot: {fileID: 11400000, guid: e5d9a4fce97edb44eada77a0d52c97ea, type: 2}
+  arm2Slot: {fileID: 11400000, guid: c952f9e30752e5944b8225869a91b3b2, type: 2}
   chestSlot: {fileID: 0}
   legsSlot: {fileID: 0}
 --- !u!114 &7521909171164780629

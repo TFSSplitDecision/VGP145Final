@@ -65,7 +65,7 @@ public class Dash
     /// <summary>
     /// Begins the dash ability sequence.
     /// </summary>
-    public void Begin( Vector3 targetPoint )
+    public void Begin( Vector3 direction )
     {
         // Guard conditions
         if (m_dashing) return;
@@ -77,10 +77,8 @@ public class Dash
         m_dashing = true;
         m_startPos = m_transform.position;
 
-        // Calculate dashing direction
-        Vector3 myPos = m_transform.position;
-        m_direction = (targetPoint - myPos).normalized;
-
+        // Set dashing direction
+        m_direction = direction.normalized;
 
         m_remainingCharges--;
         m_dashTimer = 0.0f;

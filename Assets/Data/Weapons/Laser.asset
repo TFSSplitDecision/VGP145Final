@@ -24,9 +24,9 @@ MonoBehaviour:
   moveSpeedAdd: 0
   damageReductionMultiply: 1
   damageReductionAdd: 0
-  m_bullet: {fileID: 53365586924077739, guid: a7b0c5c38dab52a43acaacf06bf3eae7, type: 3}
-  m_shotData: {fileID: 0}
-  m_flatDamage: 10
+  m_bullet: {fileID: 3642868453600357676, guid: 2916622b8fbfbee4392254d9175dfa81, type: 3}
+  m_shotData: {fileID: 11400000, guid: eaa768e938cde01419b7da484092255a, type: 2}
+  m_flatDamage: 1
   m_maxAmmo: 5
   m_ammo: 5
   duration: 5

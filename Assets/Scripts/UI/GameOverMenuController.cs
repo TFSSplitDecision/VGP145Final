@@ -18,7 +18,7 @@ public class GameOverMenuController : MonoBehaviour
         Debug.Log(buttons[0].name + " " + buttons[1].name);
 
         //Gotta figure out sceneIndex.
-        //buttons[0].onClick.AddListener(ChangeScene(sceneIndex));
+        buttons[0].onClick.AddListener(ChangeScene);
         buttons[1].onClick.AddListener(QuitGame);
 
         //Assuming there's a Win Screen and Lose Screen to display.
@@ -34,10 +34,9 @@ public class GameOverMenuController : MonoBehaviour
         //scoreDisplay = GameManager.Instance.scoreText.toString
     }
 
-    //Could just load the Main Menu without taking an argument but whatever?
-    public void ChangeScene(int sceneIndex)
+    public void ChangeScene()
     {
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(2);
     }
 
     //Maybe something the GameManager should have instead.

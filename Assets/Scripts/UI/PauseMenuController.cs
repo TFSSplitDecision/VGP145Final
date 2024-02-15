@@ -15,9 +15,9 @@ public class PauseMenuController : MonoBehaviour
         buttons = GetComponentsInChildren<Button>();
         Debug.Log(buttons[0].name + " " + buttons[1].name);
 
+        //These buttons aren't clickable for some reason.
         buttons[0].onClick.AddListener(Resume);
-        //Figure out Scene Index.
-        //buttons[1].onClick.AddListener(ChangeScene(sceneIndex));
+        buttons[1].onClick.AddListener(ChangeScene);
     }
 
     private void OnEnable()
@@ -35,13 +35,14 @@ public class PauseMenuController : MonoBehaviour
 
     private void Resume()
     {
+        Debug.Log("Resume?");
         Time.timeScale = 1;
         Debug.Log(Time.timeScale);
         gameObject.SetActive(false);
     }
 
-    private void ChangeScene(int sceneIndex)
+    private void ChangeScene()
     {
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene("MainMenuTestScene");
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame()
     {
-        Debug.Log("Switch to Game Scene");
+        SceneManager.LoadScene("LevelDesignTestScene1");
     }
     public void OpenSettings()
     {
@@ -23,21 +24,18 @@ public class MainMenu : MonoBehaviour
         SettingsPanel.SetActive(true);
         CreditsPanel.SetActive(false);
     }
-
     public void ClosePanel ()
     {
         MainMenuPanel.SetActive(true);
         SettingsPanel.SetActive(false);
         CreditsPanel.SetActive(false);
     }
-
     public void OpenCredits()
     {
         MainMenuPanel.SetActive(false);
         SettingsPanel.SetActive(false);
         CreditsPanel.SetActive(true);
     }
-
     public void QuitGame()
     {
         #if UNITY_EDITOR

@@ -45,8 +45,9 @@ public class UIManager : Singleton<UIManager>
                 if (!mm)
                     Instantiate(prefabmm);
             }
-            if (scene.name == "GameScene")
+            if (scene.name == "LevelDesignTestScene1")
             {
+                Debug.Log("Wtf?");
                 //UIManager handles enabling and disabling.
                 pm = FindObjectOfType<Canvas>();
                 if (!pm)
@@ -76,6 +77,7 @@ public class UIManager : Singleton<UIManager>
     {
         if (Input.GetKeyDown(KeyCode.Escape) && pm)
         {
+            Debug.Log("Pause?");
             pm.gameObject.SetActive(true);
         }
     }

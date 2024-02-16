@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -22,6 +23,7 @@ public class ScoreManager : MonoBehaviour
     private Coroutine comboTimerCoroutine; // Reference to the active combo timer coroutine
     public int currentComboCount = 0;
 
+    public HealthManager healthManager;
 
     private void Awake()
     {
@@ -36,6 +38,11 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        healthManager = FindObjectOfType<HealthManager>();
+    }
+
     // Public function to return the current score when called
     public int GetScore()
     {
@@ -43,15 +50,20 @@ public class ScoreManager : MonoBehaviour
     }
 
     // TODO: Add a function to increase score that don't use the multiplier for events like early wave spawn bonus
+    public int EarlyWaveSpawnBonus()
+    {
+        score += earlyWaveBonus;
+        return score;
+    }
 
+    // Public function that gives bonus score at the end of level based on player's current health
+    public int ScoreHealthBonus()
+    {
+        float currentHealth = healthManager.GetHealth();
+        score += Mathf.RoundToInt(currentHealth);
+        return score;
+    }
 
-
-
-    // TODO: Add a function that gives bonus score at the end of level based on player's current health
-
-
-    
-    
     // OR ALTERNATIVELY: Add a generic score increase function that will be called manually
 
     

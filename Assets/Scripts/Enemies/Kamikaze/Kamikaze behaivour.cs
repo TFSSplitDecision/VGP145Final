@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class suicideBomberAI : MonoBehaviour
+public class Kamikaze : MonoBehaviour
 {
     public Transform player; // Reference to the player's transform
     public float walkSpeed = 2f; // Initial walking speed
@@ -32,13 +32,12 @@ public class suicideBomberAI : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            // Check if the enemy should start running
-            if (distanceToPlayer <= detectionDistance && !isRunning)
-            {
-                isRunning = true;
-                currentSpeed = runSpeed;
-                Invoke("SelfDestruct", selfDestructDelay);
-            }
+            //Once within the a certain distance from the player, initiate launching visual
+
+            //On launch time, grab player location and fly to that
+
+            //On Land, explode
+            //damage on radius and, impulse explosion
         }
     }
 

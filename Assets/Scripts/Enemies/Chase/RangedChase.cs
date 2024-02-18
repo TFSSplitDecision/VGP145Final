@@ -5,13 +5,11 @@ public class RangedChase : MonoBehaviour
 {
     public Transform player;
     public float range = 10;
-    private NavMeshAgent agent;
+    NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
-        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame

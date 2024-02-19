@@ -1755,6 +1755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1212239144}
   - component: {fileID: 1212239146}
+  - component: {fileID: 1212239147}
   m_Layer: 5
   m_Name: Master
   m_TagString: Untagged
@@ -1835,6 +1836,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1212239147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212239143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f34a55acd6eb5894e969712e2380c25d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1216887824
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,6 +2754,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1540047178}
   - component: {fileID: 1540047180}
+  - component: {fileID: 1540047181}
   m_Layer: 5
   m_Name: SoundFX
   m_TagString: Untagged
@@ -2821,6 +2835,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1540047181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540047177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f34a55acd6eb5894e969712e2380c25d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1542184484
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,6 +3027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1584653802}
   - component: {fileID: 1584653804}
+  - component: {fileID: 1584653805}
   m_Layer: 5
   m_Name: Music
   m_TagString: Untagged
@@ -3081,6 +3108,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1584653805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584653801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f34a55acd6eb5894e969712e2380c25d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1603657072
 GameObject:
   m_ObjectHideFlags: 0
@@ -3943,9 +3982,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a614d4ae700b7d646a49f3a840378cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  master: {fileID: 1212239146}
-  music: {fileID: 1584653804}
-  sound_fx: {fileID: 1540047180}
+  master: {fileID: 1212239147}
+  music: {fileID: 1584653805}
+  sfx: {fileID: 1540047181}
+  masterMixGroup: {fileID: 24300002, guid: cb4ef924a3553e64b9281e1ef42892ea, type: 2}
+  musicMixGroup: {fileID: -1650643458399725004, guid: cb4ef924a3553e64b9281e1ef42892ea, type: 2}
+  sfxMixGroup: {fileID: -5991520222266135158, guid: cb4ef924a3553e64b9281e1ef42892ea, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

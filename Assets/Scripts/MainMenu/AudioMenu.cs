@@ -1,21 +1,48 @@
+using System;
+using System.Runtime.Serialization;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using UnityEngine.Audio;
 
-public class AudioMenu : MonoBehaviour, IPointerUpHandler {
+public class AudioMenu : MonoBehaviour {
     [SerializeField]
-    private Slider master;
+    private SliderManager master;
     [SerializeField]
-    private Slider music;
+    private SliderManager music;
     [SerializeField]
-    private Slider sound_fx;
+    private SliderManager sfx;
+
+    [SerializeField]
+    private AudioMixerGroup masterMixGroup;
+    [SerializeField]
+    private AudioMixerGroup musicMixGroup;
+    [SerializeField]
+    private AudioMixerGroup sfxMixGroup;
 
     void Start() {
-        master.on.AddListener(OnPointerUp);
-    }
+        LinkedList<ISerializable>.Enumerator store = SaveLoad.getObjects(typeof(AudioData));
+        AudioData saveData = new AudioData();
+        if (store.MoveNext())
+            saveData = (AudioData) store.Current;
+        master.SetSlideValue(saveData.master);
+        music.SetSlideValue(saveData.music);
+        sfx.SetSlideValue(saveData.sfx);
 
-    // Needs to be invoked when the value of the slider changes.
-    public void OnPointerUp(PointerEventData data) {
-        
+        master.myEvent.AddListener((float data) => {
+            saveData.master = data;
+        });
+        music.myEvent.AddListener((float data) => {
+            saveData.music = data;
+        });
+        sfx.myEvent.AddListener((float data) => {
+            saveData.master = data;
+        });
     }
+}
+
+[SerializableAttribute]
+public class AudioData {
+    public float master = 1;
+    public float music = 1;
+    public float sfx = 1;
 }

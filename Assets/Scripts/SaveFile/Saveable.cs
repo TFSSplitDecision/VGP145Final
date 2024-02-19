@@ -1,1 +1,1 @@
-interface ISaveable{ }
+public interface ISaveable{ }

@@ -7,9 +7,10 @@ using System.Security.Cryptography;
 using UnityEngine;
 
 /// <summary>
-/// Runs off of the ISerializable object.
+/// Runs off of the ISerializable object
 /// Can mark a class as [SerializableAttribute]
 /// and mark the parts that shouldn't be serialized as [NonSerialized]
+/// Designed as a single file system
 /// </summary>
 public static class SaveLoad {
     private static Dictionary<System.Type, LinkedList<ISerializable>> allData;

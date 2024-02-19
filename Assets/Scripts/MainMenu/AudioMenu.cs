@@ -13,36 +13,50 @@ public class AudioMenu : MonoBehaviour {
     private SliderManager sfx;
 
     [SerializeField]
-    private AudioMixerGroup masterMixGroup;
-    [SerializeField]
-    private AudioMixerGroup musicMixGroup;
-    [SerializeField]
-    private AudioMixerGroup sfxMixGroup;
+    private AudioMixer masterMixer;
 
     void Start() {
-        LinkedList<ISerializable>.Enumerator store = SaveLoad.getObjects(typeof(AudioData));
+        LinkedList<ISaveable>.Enumerator store = SaveLoad.getObjects(typeof(AudioData));
         AudioData saveData = new AudioData();
-        if (store.MoveNext())
+        if (store.MoveNext()) {
             saveData = (AudioData) store.Current;
+            Debug.Log("Has data to be loaded");
+        }
         master.SetSlideValue(saveData.master);
         music.SetSlideValue(saveData.music);
         sfx.SetSlideValue(saveData.sfx);
 
         master.myEvent.AddListener((float data) => {
             saveData.master = data;
+
+            masterMixer.SetFloat("master", data);
+
+            SaveLoad.resetType(typeof(AudioData));
+            SaveLoad.addSaveable(saveData);
+            SaveLoad.Save();
         });
         music.myEvent.AddListener((float data) => {
             saveData.music = data;
+            masterMixer.SetFloat("music", data);
+
+            SaveLoad.resetType(typeof(AudioData));
+            SaveLoad.addSaveable(saveData);
+            SaveLoad.Save();
         });
         sfx.myEvent.AddListener((float data) => {
-            saveData.master = data;
+            saveData.sfx = data;
+            masterMixer.SetFloat("sfx", data);
+
+            SaveLoad.resetType(typeof(AudioData));
+            SaveLoad.addSaveable(saveData);
+            SaveLoad.Save();
         });
     }
 }
 
-[SerializableAttribute]
-public class AudioData {
-    public float master = 1;
-    public float music = 1;
-    public float sfx = 1;
+[Serializable]
+public class AudioData : ISaveable {
+    public float master = 0;
+    public float music = 0;
+    public float sfx = 0;
 }

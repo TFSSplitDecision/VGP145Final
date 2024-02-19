@@ -4,17 +4,18 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
-using UnityEngine;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Runs off of the ISerializable object
-/// Can mark a class as [SerializableAttribute]
-/// and mark the parts that shouldn't be serialized as [NonSerialized]
+/// Saveable data must extend the Saveable class
+/// (and mark the parts that shouldn't be serialized as [NonSerialized],
+/// but why would u if class only holds data)
 /// Designed as a single file system
 /// </summary>
 public static class SaveLoad {
-    private static Dictionary<System.Type, LinkedList<ISerializable>> _allData = null;
-    private static Dictionary<System.Type, LinkedList<ISerializable>> allData {
+    private static Dictionary<Type, LinkedList<ISaveable>> _allData = null;
+    private static Dictionary<Type, LinkedList<ISaveable>> allData {
         set {
             _allData = value;
         }
@@ -23,6 +24,7 @@ public static class SaveLoad {
             return _allData;
         }
     }
+    private static Dictionary<string, string> testData = new Dictionary<string, string>();
     private const string fileName = "vgp145_saveFile.bin";
 
     // Dummy encryption stuff
@@ -33,12 +35,12 @@ public static class SaveLoad {
     /// https://stackoverflow.com/questions/5869922/c-sharp-encrypt-serialized-file-before-writing-to-disk
     /// </summary>
     public static void Save() {
-        string saveFilePath = Path.Combine(Application.persistentDataPath, fileName);
+        string saveFilePath = Path.Combine(UnityEngine.Application.persistentDataPath, fileName);
         DESCryptoServiceProvider des = new DESCryptoServiceProvider();
-        FileStream fs = new FileStream(saveFilePath, FileMode.CreateNew, FileAccess.Write);
+        FileStream fs = new FileStream(saveFilePath, FileMode.Create, FileAccess.Write);
         CryptoStream cryptoStream = new CryptoStream(fs, des.CreateEncryptor(key, iv), CryptoStreamMode.Write);
         BinaryFormatter formatter = new BinaryFormatter();
-        formatter.Serialize(cryptoStream, allData);
+        formatter.Serialize(fs, allData);
     }
 
     /// <summary>
@@ -46,26 +48,32 @@ public static class SaveLoad {
     /// https://stackoverflow.com/questions/5869922/c-sharp-encrypt-serialized-file-before-writing-to-disk
     /// </summary>
     public static void Load() {
-        string saveFilePath = Path.Combine(Application.persistentDataPath, fileName);
+        string saveFilePath = Path.Combine(UnityEngine.Application.persistentDataPath, fileName);
         if (!File.Exists(saveFilePath)) {
-            _allData = new Dictionary<System.Type, LinkedList<ISerializable>>();
+            _allData = new Dictionary<Type, LinkedList<ISaveable>>();
             return;
         }
         FileStream fs = new FileStream(saveFilePath, FileMode.Open, FileAccess.Read);
         DESCryptoServiceProvider des = new DESCryptoServiceProvider();
         CryptoStream cryptoStream = new CryptoStream(fs, des.CreateDecryptor(key, iv), CryptoStreamMode.Read);
         BinaryFormatter formatter = new BinaryFormatter();
-        _allData = (Dictionary<System.Type, LinkedList<ISerializable>>) formatter.Deserialize(cryptoStream);
+        try {
+            _allData = (Dictionary<Type, LinkedList<ISaveable>>) formatter.Deserialize(fs);
+        } catch {
+            // Bad format, trying again
+            UnityEngine.Debug.Log("Issue decyphering save file. Restarting from scratch");
+            _allData = new Dictionary<Type, LinkedList<ISaveable>>();
+        }
     }
 
     /// <summary>
     /// List of objects that can be saved.
     /// </summary>
     /// <param name="obj">The object to be saved implementing ISerializable</param>
-    public static void addSaveable(ISerializable obj) {
+    public static void addSaveable(ISaveable obj) {
         if (!allData.ContainsKey(obj.GetType()))
-            allData.Add(obj.GetType(), new LinkedList<ISerializable>());
-        allData.TryGetValue(obj.GetType(), out LinkedList<ISerializable> linkedList);
+            allData.Add(obj.GetType(), new LinkedList<ISaveable>());
+        allData.TryGetValue(obj.GetType(), out LinkedList<ISaveable> linkedList);
         linkedList.AddLast(obj);
     }
 
@@ -85,8 +93,8 @@ public static class SaveLoad {
     /// </summary>
     /// <param name="type">System.Type of object.</param>
     /// <returns>Enumerator. Will need "while MoveNext: Current" loop</returns>
-    public static LinkedList<ISerializable>.Enumerator getObjects(Type type) {
-        allData.TryGetValue(type, out LinkedList<ISerializable> linkedList);
+    public static LinkedList<ISaveable>.Enumerator getObjects(Type type) {
+        LinkedList<ISaveable> linkedList = allData.GetValueOrDefault(type, new LinkedList<ISaveable>());
         return linkedList.GetEnumerator();
     }
 }

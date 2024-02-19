@@ -1829,10 +1829,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1176328482}
   m_HandleRect: {fileID: 1016978067}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 0.551
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2828,10 +2828,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1668023078}
   m_HandleRect: {fileID: 17589314}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 0.551
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3101,10 +3101,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1487453062}
   m_HandleRect: {fileID: 1480393791}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 0.551
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3985,9 +3985,7 @@ MonoBehaviour:
   master: {fileID: 1212239147}
   music: {fileID: 1584653805}
   sfx: {fileID: 1540047181}
-  masterMixGroup: {fileID: 24300002, guid: cb4ef924a3553e64b9281e1ef42892ea, type: 2}
-  musicMixGroup: {fileID: -1650643458399725004, guid: cb4ef924a3553e64b9281e1ef42892ea, type: 2}
-  sfxMixGroup: {fileID: -5991520222266135158, guid: cb4ef924a3553e64b9281e1ef42892ea, type: 2}
+  masterMixer: {fileID: 24100000, guid: cb4ef924a3553e64b9281e1ef42892ea, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

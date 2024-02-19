@@ -13,7 +13,16 @@ using UnityEngine;
 /// Designed as a single file system
 /// </summary>
 public static class SaveLoad {
-    private static Dictionary<System.Type, LinkedList<ISerializable>> allData;
+    private static Dictionary<System.Type, LinkedList<ISerializable>> _allData = null;
+    private static Dictionary<System.Type, LinkedList<ISerializable>> allData {
+        set {
+            _allData = value;
+        }
+        get {
+            if (_allData == null) Load();
+            return _allData;
+        }
+    }
     private const string fileName = "vgp145_saveFile.bin";
 
     // Dummy encryption stuff
@@ -38,11 +47,15 @@ public static class SaveLoad {
     /// </summary>
     public static void Load() {
         string saveFilePath = Path.Combine(Application.persistentDataPath, fileName);
-        FileStream fs = new FileStream(saveFilePath, FileMode.OpenOrCreate, FileAccess.Read);
+        if (!File.Exists(saveFilePath)) {
+            _allData = new Dictionary<System.Type, LinkedList<ISerializable>>();
+            return;
+        }
+        FileStream fs = new FileStream(saveFilePath, FileMode.Open, FileAccess.Read);
         DESCryptoServiceProvider des = new DESCryptoServiceProvider();
         CryptoStream cryptoStream = new CryptoStream(fs, des.CreateDecryptor(key, iv), CryptoStreamMode.Read);
         BinaryFormatter formatter = new BinaryFormatter();
-        allData = (Dictionary<System.Type, LinkedList<ISerializable>>) formatter.Deserialize(cryptoStream);
+        _allData = (Dictionary<System.Type, LinkedList<ISerializable>>) formatter.Deserialize(cryptoStream);
     }
 
     /// <summary>

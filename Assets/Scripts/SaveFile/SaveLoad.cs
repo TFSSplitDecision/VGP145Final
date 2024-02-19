@@ -7,8 +7,7 @@ using System.Security.Cryptography;
 using Unity.VisualScripting;
 
 /// <summary>
-/// Runs off of the ISerializable object
-/// Saveable data must extend the Saveable class
+/// Saveable data must extend the ISaveable interface and be marked as [Serializable]
 /// (and mark the parts that shouldn't be serialized as [NonSerialized],
 /// but why would u if class only holds data)
 /// Designed as a single file system

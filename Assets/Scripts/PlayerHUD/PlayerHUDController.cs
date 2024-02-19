@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class PlayerHUDController : MonoBehaviour
     private EnemySpawner enemySpawner;
     private HealthManager playerHealth;
     private InventoryManager inventoryManager;
+    // private ScoreManager scoreManager;
 
     [Header("Enemy Spawner")]
     public Text waveCounterText;
@@ -26,6 +28,10 @@ public class PlayerHUDController : MonoBehaviour
     public Image arm1;
     public Image arm2;
 
+    [Header("Score")]
+    public Text scoreText;
+    public Text comboText;
+
     void Start()
     {
         InitializeReferences();
@@ -36,6 +42,7 @@ public class PlayerHUDController : MonoBehaviour
         UpdateEnemySpawnerUI();
         UpdatePlayerHealthUI();
         UpdateWeaponUI();
+        UpdateScoreUI();
     }
 
     void InitializeReferences()
@@ -43,6 +50,7 @@ public class PlayerHUDController : MonoBehaviour
         enemySpawner = FindObjectOfType<EnemySpawner>();
         playerHealth = FindObjectOfType<HealthManager>();
         inventoryManager = FindObjectOfType<InventoryManager>();
+        // scoreManager = FindObjectOfType<scoreManager>();
 
         if (enemySpawner == null)
             Debug.Log("EnemySpawner not found in the scene.");
@@ -52,6 +60,9 @@ public class PlayerHUDController : MonoBehaviour
 
         if (inventoryManager == null)
             Debug.Log("WeaponSwap not found in the scene.");
+
+        /* if (scoreManager == null)
+            Debug.Log("ScoreManager not found in the sccene."); */
     }
 
     void UpdateEnemySpawnerUI()
@@ -87,5 +98,11 @@ public class PlayerHUDController : MonoBehaviour
             Sprite arm1 = inventoryManager.getArm1Sprite();
             Sprite arm2 = inventoryManager.getArm1Sprite();
         }
+    }
+
+    void UpdateScoreUI()
+    {
+        // scoreText.text = "Score: " + scoreManager.GetScore().ToString();
+        // comboText.text = "x" + scoreManager.UpdateMultiplier().ToString();
     }
 }

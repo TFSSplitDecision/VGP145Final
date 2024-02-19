@@ -1,7 +1,10 @@
-Summary:
+# Summary
 
-Details:
+# Details
 
-Bug Fixes:
+# Demo Explanation
+<!-- This section helps explains how code reveiwers can interact with your project -->
 
-Deleted:
+# Bug Fixes
+
+# Deleted

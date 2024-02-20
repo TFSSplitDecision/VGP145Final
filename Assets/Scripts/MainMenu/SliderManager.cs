@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UI;
 
 public class SliderManager : MonoBehaviour, IPointerUpHandler {

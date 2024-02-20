@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
-using Unity.VisualScripting;
 
 /// <summary>
 /// Saveable data must extend the ISaveable interface and be marked as [Serializable]
@@ -39,7 +37,7 @@ public static class SaveLoad {
         FileStream fs = new FileStream(saveFilePath, FileMode.Create, FileAccess.Write);
         CryptoStream cryptoStream = new CryptoStream(fs, des.CreateEncryptor(key, iv), CryptoStreamMode.Write);
         BinaryFormatter formatter = new BinaryFormatter();
-        formatter.Serialize(fs, allData);
+        formatter.Serialize(cryptoStream, allData);
     }
 
     /// <summary>
@@ -57,7 +55,7 @@ public static class SaveLoad {
         CryptoStream cryptoStream = new CryptoStream(fs, des.CreateDecryptor(key, iv), CryptoStreamMode.Read);
         BinaryFormatter formatter = new BinaryFormatter();
         try {
-            _allData = (Dictionary<Type, LinkedList<ISaveable>>) formatter.Deserialize(fs);
+            _allData = (Dictionary<Type, LinkedList<ISaveable>>) formatter.Deserialize(cryptoStream);
         } catch {
             // Bad format, trying again
             UnityEngine.Debug.Log("Issue decyphering save file. Restarting from scratch");

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class MapCamera : MonoBehaviour
 {
     //Attach the camera to this in the inspector
     Camera mainCamera;
@@ -15,15 +15,6 @@ public class CameraController : MonoBehaviour
     public float minZClamp;
     public float maxZClamp;
 
-    //cameraZ is for the distance away from the player
-    public float cameraZ;
-
-    //This is to get the correct height of the camera
-    public float cameraHeight;
-
-    //This is to get the correct angle of the camera, I initially set this to be 45
-    public float cameraAngle;
-
     //This is for camera smoothness
     public float cameraSpeed;
 
@@ -31,14 +22,10 @@ public class CameraController : MonoBehaviour
     public GameObject playerObject;
 
     private bool shake;
-    private MapCamera mapCamera;
 
     void Start()
     {
-        mainCamera = Camera.main;
-        mapCamera = FindObjectOfType<MapCamera>();
-
-        if (!mapCamera) Debug.Log("Map Camera Not Found");
+        mainCamera = GetComponent<Camera>();
     }
 
     private void LateUpdate()
@@ -48,16 +35,11 @@ public class CameraController : MonoBehaviour
 
         cameraPos = transform.position;
         cameraPos.x = Mathf.Clamp(playerObject.transform.position.x, minXClamp, maxXClamp);
-        cameraPos.y = cameraHeight;
-        cameraPos.z = Mathf.Clamp(playerObject.transform.position.z + cameraZ, minZClamp, maxZClamp);
+        cameraPos.z = Mathf.Clamp(playerObject.transform.position.z, minZClamp, maxZClamp);
         transform.position = Vector3.Lerp(transform.position, cameraPos, cameraSpeed * Time.deltaTime);
-
-        Quaternion newRotation = Quaternion.Euler(cameraAngle, 0.0f, 0.0f);
-        if (!shake) transform.rotation = newRotation;
     }
     public IEnumerator Shake(float duration, float magnitude)
     {
-        mapCamera.StartCoroutine(Shake(duration, magnitude));
         Vector3 originalPosition = transform.position;
         float elapsed = 0.0f;
 

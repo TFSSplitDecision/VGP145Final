@@ -34,7 +34,7 @@ public class HealthManager : MonoBehaviour
         inventoryManager = GetComponent<InventoryManager>();
 
         m_actualMaxHealth = m_baseMaxHealth;
-
+        RestoreHealth();
 
         if( gameObject.CompareTag("Player") )
         {

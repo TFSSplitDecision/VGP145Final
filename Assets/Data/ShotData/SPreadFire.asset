@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SPreadFire
   m_EditorClassIdentifier: 
   m_fireRate: 1
-  m_bulletCount: 3
-  m_spreadAngle: 30
+  m_bulletCount: 7
+  m_spreadAngle: 60

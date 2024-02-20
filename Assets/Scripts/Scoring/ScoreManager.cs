@@ -82,6 +82,7 @@ public class ScoreManager : MonoBehaviour
         UpdateMultiplier();
 
         score += baseEnemyKillScore * multiplier;
+        Debug.Log("Score " + score);
     }
 
     // This is the coroutine for the combo timer

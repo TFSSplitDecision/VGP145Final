@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Tankbehaivour : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class Tankbehaivour : MonoBehaviour
     //Rigidbody rb;
     CharacterController cc;
     string targetTag;
+    private NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         cc = GetComponent<CharacterController>();
 
         if (!target)
@@ -23,11 +26,15 @@ public class Tankbehaivour : MonoBehaviour
             targetTag = target.tag;
             Debug.Log("Target Tag: " + targetTag);
         }
+
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        agent.SetDestination(target.position);
+        /*
         Vector3 targetPos = new Vector3(target.position.x, 0, target.position.z);
         Vector3 targetDir = (targetPos - new Vector3(transform.position.x, 0, transform.position.z)).normalized;
 
@@ -42,6 +49,7 @@ public class Tankbehaivour : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(turnDir);
 
         cc.Move(speed * Time.deltaTime * targetDir);
+        */
     }
 
     private void OnTriggerEnter(Collider other)

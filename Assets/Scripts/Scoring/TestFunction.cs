@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestFunction : MonoBehaviour
 {
     public float testKillInterval = 1.0f;
-    public int totalKillstoSimulate = 5;
+    public int totalKillsToSimulate = 10;
     private int currentKillCount = 0;
 
     // Start is called before the first frame update
@@ -22,14 +22,13 @@ public class TestFunction : MonoBehaviour
 
     void SimulateKill()
     {
-        if (currentKillCount >= totalKillstoSimulate)
+        if (currentKillCount >= totalKillsToSimulate)
         {
             CancelInvoke(nameof(SimulateKill));
             Debug.Log("Kill simulation complete");
             return;
         }
         ScoreManager.instance.RegisterKill();
-        Debug.Log("Kill Registered");
 
         currentKillCount++;
     }

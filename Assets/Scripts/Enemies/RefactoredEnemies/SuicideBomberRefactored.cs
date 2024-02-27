@@ -27,7 +27,7 @@ public class SuicideBomberRefactored : EnemyBase
             // Check if the enemy should start running
             if (distanceToPlayer <= attackDist && !isRunning)
             {
-                isAttacking true; 
+                isAttacking = true; 
                 isRunning = true;
                 baseSpeed = runSpeed;
                 Invoke("SelfDestruct", selfDestructDelay);

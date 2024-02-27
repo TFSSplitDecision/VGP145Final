@@ -20,6 +20,12 @@ public abstract class BaseShot : IShot
         m_audioSource = owner.GetComponent<AudioSource>();
     }
 
+    protected void InvokeOnShoot(Vector3 forward)
+    {
+        // Moved the code here so I can reuse it in SpreadShot -Christos
+        OnShoot?.Invoke(forward);
+    }
+
     public virtual void Shoot(ShotData shotData, GameObject bullet, float damage)
     {
         Vector3 forward = m_transform.forward;
@@ -27,7 +33,7 @@ public abstract class BaseShot : IShot
         m_bulletSpawner.SpawnBullet(forward, bullet, damage);
 
         // Raise the OnShoot event with the direction of the shot
-        OnShoot?.Invoke(forward);
+        InvokeOnShoot(forward);
     }
 
     public virtual void Stop()

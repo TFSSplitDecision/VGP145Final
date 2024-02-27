@@ -53,6 +53,9 @@ public class ShootManager : MonoBehaviour
 
     private void PlayGunSound(Vector3 direction)
     {
+        if( m_audioSource == null )
+            m_audioSource = GetComponent<AudioSource>();
+
         // Check if gunSound is assigned and play the sound
         if (gunSound != null && m_audioSource != null)
         {

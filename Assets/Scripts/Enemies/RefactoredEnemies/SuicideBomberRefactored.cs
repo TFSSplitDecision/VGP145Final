@@ -25,9 +25,9 @@ public class SuicideBomberRefactored : EnemyBase
 
 
             // Check if the enemy should start running
-            if (distanceToPlayer <= attackDist && !isRunning)
+            if (distanceToPlayer <= attackDist)
             {
-                isAttacking = true; 
+                //isAttacking = true; 
                 isRunning = true;
                 baseSpeed = runSpeed;
                 Invoke("SelfDestruct", selfDestructDelay);
@@ -36,6 +36,7 @@ public class SuicideBomberRefactored : EnemyBase
     
     void SelfDestruct()
     {
+        Debug.Log("Explode");
         // Implement self-destruct behavior here (e.g., particle effects, damage to player, etc.)
         Destroy(gameObject);
     }

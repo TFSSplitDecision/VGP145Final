@@ -2259,7 +2259,7 @@ Transform:
   m_GameObject: {fileID: 1170826364}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.528473, y: 0.5, z: -22.96}
+  m_LocalPosition: {x: -4.53, y: 0.5, z: -13.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2282,10 +2282,10 @@ MonoBehaviour:
   baseSpeed: 5
   turnSpeed: 120
   widthOfView: 0.5
-  attackDist: 15
+  attackDist: 1
   isAttacking: 0
   selfDestructDelay: 1.5
-  isRunning: 0
+  isRunning: 1
   runSpeed: 6
 --- !u!114 &1170826371
 MonoBehaviour:

@@ -12,11 +12,7 @@ GameObject:
   - component: {fileID: 2499428488193469710}
   - component: {fileID: 8600112968924884190}
   - component: {fileID: 5803941238987526604}
-<<<<<<< HEAD
-  - component: {fileID: 1883542270689196250}
-=======
   - component: {fileID: 6891263494993504730}
->>>>>>> c860a7f3a26c007519422354b44caee16da94bfd
   m_Layer: 0
   m_Name: Chase
   m_TagString: Untagged
@@ -110,11 +106,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
---- !u!114 &1883542270689196250
-=======
 --- !u!114 &6891263494993504730
->>>>>>> c860a7f3a26c007519422354b44caee16da94bfd
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,11 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7780968649367348215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< HEAD
-  m_Script: {fileID: 11500000, guid: 51c94ec18db881b46890c04b6b8d3200, type: 3}
-=======
   m_Script: {fileID: 11500000, guid: ae91f0b995d18c245bc6d9e9ed675f5f, type: 3}
->>>>>>> c860a7f3a26c007519422354b44caee16da94bfd
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}

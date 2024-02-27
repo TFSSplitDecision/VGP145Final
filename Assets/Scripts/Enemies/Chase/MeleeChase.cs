@@ -14,8 +14,7 @@ public class MeleeChase : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
-        player = GameObject.FindGameObjectWithTag("Player").transform; 
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,6 +23,7 @@ public class suicideBomberAI : MonoBehaviour
 
     void Update()
     {
+        //Move towards the player
         agent.SetDestination(player.position);
 
         // Check if the player is not null (exists)
@@ -42,7 +44,6 @@ public class suicideBomberAI : MonoBehaviour
             if (distanceToPlayer <= detectionDistance && !isRunning)
             {
                 isRunning = true;
-                //currentSpeed = runSpeed;
                 agent.speed = runSpeed;
                 Invoke("SelfDestruct", selfDestructDelay);
             }

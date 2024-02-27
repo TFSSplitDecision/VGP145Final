@@ -33,6 +33,7 @@ public class Tankbehaivour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Move towards the player
         agent.SetDestination(target.position);
         /*
         Vector3 targetPos = new Vector3(target.position.x, 0, target.position.z);
@@ -49,6 +50,7 @@ public class Tankbehaivour : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(turnDir);
 
         cc.Move(speed * Time.deltaTime * targetDir);
+
         */
     }
 

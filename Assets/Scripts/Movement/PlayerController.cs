@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Dash dash;
     [SerializeField] private Blink blink;
-    
+
+
+    private Vector3 m_lastMoveDir;
 
 
     private void Start()
@@ -50,7 +52,7 @@ public class PlayerController : MonoBehaviour
             case SpecialType.Dash:
 
                 if (buttonPress)
-                    dash.Begin(m_lookTarget);
+                    dash.Begin(m_lastMoveDir);
                 // Update dash logic
                 dash.Update();
                 break;
@@ -76,6 +78,9 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 movement = InputUtils.move3d * moveSpeed;
         m_charController.SimpleMove(movement);
+
+        if (movement.magnitude > float.Epsilon)
+            m_lastMoveDir = movement;
     }
     
     #if UNITY_EDITOR

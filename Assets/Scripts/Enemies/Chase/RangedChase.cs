@@ -10,7 +10,6 @@ public class RangedChase : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 

@@ -31,10 +31,14 @@ public class CameraController : MonoBehaviour
     public GameObject playerObject;
 
     private bool shake;
+    private MapCamera mapCamera;
 
     void Start()
     {
         mainCamera = Camera.main;
+        mapCamera = FindObjectOfType<MapCamera>();
+
+        if (!mapCamera) Debug.Log("Map Camera Not Found");
     }
 
     private void LateUpdate()
@@ -53,6 +57,7 @@ public class CameraController : MonoBehaviour
     }
     public IEnumerator Shake(float duration, float magnitude)
     {
+        mapCamera.StartCoroutine(Shake(duration, magnitude));
         Vector3 originalPosition = transform.position;
         float elapsed = 0.0f;
 

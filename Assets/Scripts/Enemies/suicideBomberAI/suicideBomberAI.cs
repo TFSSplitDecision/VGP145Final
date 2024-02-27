@@ -14,16 +14,11 @@ public class suicideBomberAI : MonoBehaviour
     private bool isRunning = false;
     private NavMeshAgent agent;
 
-
-
     void Start()
     {
         currentSpeed = walkSpeed;
-
         agent = GetComponent<NavMeshAgent>();
-
-        player = GameObject.FindGameObjectWithTag("Player").transform; 
-        
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
@@ -31,8 +26,6 @@ public class suicideBomberAI : MonoBehaviour
         //Move towards the player
         agent.SetDestination(player.position);
 
-
-       
         // Check if the player is not null (exists)
         if (player != null)
         {
@@ -40,12 +33,12 @@ public class suicideBomberAI : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
             // Walk towards the player
-          //  transform.position = Vector3.MoveTowards(transform.position, player.position, currentSpeed * Time.deltaTime);
+            // transform.position = Vector3.MoveTowards(transform.position, player.position, currentSpeed * Time.deltaTime);
 
             // Rotate to face the player
             Vector3 direction = player.position - transform.position;
-           // float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-           // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             // Check if the enemy should start running
             if (distanceToPlayer <= detectionDistance && !isRunning)
